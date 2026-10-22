@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JLH9GD9SVR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JLH9GD9SVR');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2027 강원대 항저우 AI 체험·실증 3박4일 스마트 가이드북</title>
+    <meta name="description" content="[강원대학교] 항저우 AI 체험·실증 3박4일 · 2027.04.26~04.29 · FlyZoo AI호텔 · AI Hangzhou 2027 · 알리바바 시시 · 도시브레인">
+    <meta property="og:title" content="2027 강원대 항저우 AI 체험·실증 3박4일">
+    <meta property="og:description" content="2027.04.26~04.29 · ICN↔HGH · FlyZoo · AI Hangzhou 2027 · 알리바바 시시 · 허마셴성 · 도시브레인">
+    <meta property="og:image" content="https://indadady.github.io/270426_Kangwon/assets/images/og-thumb-2027.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://indadady.github.io/270426_Kangwon/assets/images/og-thumb-2027.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Nanum+Myeongjo:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f8fafc; color: #1e293b; word-break: keep-all; }
+        .hero-bg {
+            background: linear-gradient(rgba(3, 18, 42, 0.68), rgba(0, 48, 118, 0.58)), url('assets/images/hero-hangzhou.jpg'), url('assets/images/hero-2027.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+        @media (max-width: 768px){ .hero-bg { background-attachment: scroll; } }
+        #map { height: 500px; width: 100%; border-radius: 1rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,.1); z-index: 10; }
+        @media (min-width: 768px) { #map { height: 600px; } }
+        @media (max-width: 768px) { #map { height: 440px; } }
+        .custom-icon { background: transparent; border: none; }
+        .map-pin-wrap { display: flex; flex-direction: column; align-items: center; }
+        .map-pin-dot {
+            width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; color: #fff;
+            border: 2px solid rgba(255,255,255,.95);
+            box-shadow: 0 8px 16px rgba(15,23,42,.18);
+        }
+        .map-pin-label {
+            margin-top: 3px; background: rgba(255,255,255,.96); color: #0f172a;
+            font-size: 10px; font-weight: 800; letter-spacing: -.04em; line-height: 1.2;
+            padding: 2px 6px; border-radius: 6px; white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(15,23,42,.12);
+        }
+        .map-bus { font-size: 22px; line-height: 1; transform-origin: center center; display: inline-block; filter: drop-shadow(0 4px 8px rgba(15,23,42,.35)); }
+        .leaflet-control-zoom { display: none !important; }
+        .map-zoom-btns {
+            position: absolute; left: 12px; bottom: 14px; z-index: 450;
+            display: flex; flex-direction: column; gap: 6px;
+        }
+        .map-zoom-btns button {
+            width: 40px; height: 40px; border-radius: 12px; border: 1px solid #cbd5e1;
+            background: rgba(255,255,255,.96); color: #0f172a; font-size: 18px; font-weight: 800;
+            box-shadow: 0 4px 14px rgba(15,23,42,.12);
+        }
+        .map-zoom-btns button:active { transform: scale(.96); }
+        #map-distance { min-width: 8.5rem; max-width: 13.5rem; }
+        .leaflet-tooltip.custom-map-tooltip {
+            background-color: rgba(255,255,255,.95) !important; border: 1px solid #e2e8f0 !important;
+            border-radius: .75rem !important; box-shadow: 0 10px 15px -3px rgba(0,0,0,.1) !important;
+            font-family: 'Noto Sans KR', sans-serif; padding: 6px 12px; white-space: nowrap;
+        }
+        .leaflet-tooltip-top.custom-map-tooltip::before { border-top-color: rgba(255,255,255,.95) !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .animate-fade-in-up { animation: fadeInUp .8s ease-out forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        section { scroll-margin-top: 80px; }
+        body.event-day section { scroll-margin-top: 148px; }
+        #phrase-modal { backdrop-filter: blur(5px); }
+        .schedule-thumb { width: 100%; max-width: 14rem; aspect-ratio: 4/3; object-fit: cover; border-radius: .75rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(15,23,42,.08); }
+        @media screen { #print-area { display: none !important; } }
+        @media print {
+            @page { size: A4 portrait; margin: 10mm 10mm; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            html, body { background: #fff !important; color: #1e293b !important; }
+            header, footer, .print\:hidden, .no-print, #event-day-bar, #toast { display: none !important; }
+            main, body { padding: 0 !important; margin: 0 !important; }
+            #print-area { display: block !important; width: 100%; box-sizing: border-box; }
+            .print-page { display: flex; flex-direction: column; width: 100%; min-height: 277mm; box-sizing: border-box; }
+            .print-page-break { page-break-after: always; break-after: page; }
+            .std-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #004098; padding-bottom: 8px; margin-bottom: 10px; }
+            .std-header img { height: 36px; object-fit: contain; }
+            .std-doc-info { text-align: right; font-size: 11.5px; color: #475569; font-weight: 600; }
+            .std-title { text-align: center; margin-bottom: 8px; }
+            .std-title h1 { font-size: 20px; font-weight: 700; color: #0f172a; margin: 0; letter-spacing: -0.4px; line-height: 1.35; }
+            .std-overview { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; background: #f8fafc !important; border: 1px solid #94a3b8 !important; border-radius: 6px; padding: 8px 14px; margin-bottom: 8px; font-size: 12.5px; }
+            .std-overview div { display: flex; gap: 8px; }
+            .std-overview .label { font-weight: 700; color: #004098; }
+            .std-table { width: 100%; flex: 1 1 auto; border-collapse: collapse; font-size: 12px; table-layout: fixed; border: 2px solid #1e293b !important; margin-bottom: 8px; }
+            .std-table th { border: 1px solid #1e293b !important; background: #f8fafc !important; font-weight: 700; text-align: center; padding: 7px 6px !important; color: #1e293b; font-size: 13px; }
+            .std-table td { border: 1px solid #1e293b !important; padding: 8px 10px !important; vertical-align: top; word-break: keep-all; line-height: 1.48; }
+            .std-table tbody tr { page-break-inside: avoid; break-inside: avoid; }
+            .col-date { width: 14%; text-align: center; font-weight: 700; background: #f8fafc !important; vertical-align: middle; }
+            .col-date .date-sub { display: block; font-size: 11.5px; color: #475569; font-weight: 600; margin-top: 3px; }
+            .col-date .date-city { display: block; margin-top: 6px; font-size: 12px; font-weight: 700; color: #004098; line-height: 1.4; }
+            .col-desc { width: 70%; }
+            .col-meal { width: 16%; text-align: center; vertical-align: middle; }
+            .day-divider td { border-top: 2px solid #1e293b !important; }
+            .time-flow { margin-bottom: 4px; font-weight: 500; }
+            .time-tag { display: inline-block; color: #004098; font-weight: 700; margin-right: 5px; }
+            .highlight { font-weight: 700; color: #0f172a; }
+            .desc-list { list-style: none; margin: 4px 0 0 !important; padding-left: 5px; }
+            .desc-list li { position: relative; padding-left: 14px; margin-bottom: 4px !important; line-height: 1.45; }
+            .desc-list li:last-child { margin-bottom: 0 !important; }
+            .desc-list li::before { content: '■'; font-size: 8px; position: absolute; left: 0; top: 4px; color: #004098; }
+            .desc-note { display: block; font-size: 11px; color: #475569; font-weight: 500; line-height: 1.4; margin-top: 1px; }
+            .hotel-divider { border: 0; border-top: 1px dashed #94a3b8; margin: 7px 0 6px 0; }
+            .hotel-info { font-size: 12.5px; color: #0f172a; }
+            .meal-wrapper { display: flex; flex-direction: column; gap: 8px; justify-content: center; height: 100%; text-align: left; padding-left: 4px; }
+            .meal-simple { display: flex; align-items: flex-start; font-size: 12.5px; color: #1e293b; line-height: 1.4; }
+            .meal-simple strong { color: #004098; margin-right: 4px; width: 22px; flex-shrink: 0; }
+            .remarks { font-size: 11.5px; color: #64748b; text-align: right; font-weight: 500; margin: 0 0 6px; }
+            .footer-box { margin-top: auto; padding-top: 10px; display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; border-top: 1px solid #e2e8f0; }
+            .brand-link { font-size: 11.5px; color: #6c757d; text-decoration: none; }
+            .manager-info { text-align: right; border-left: 3px solid #004098; padding-left: 12px; }
+            .manager-info .names { color: #0f172a; font-weight: 700; font-size: 13.5px; }
+            .print-section-title { font-size: 14px; font-weight: 800; color: #004098; margin: 0 0 8px; border-left: 4px solid #004098; padding-left: 8px; }
+            .print-check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 12px; margin: 2px 0 10px; }
+            .print-check-item { display: flex; align-items: center; gap: 8px; font-size: 12px; line-height: 1.35; border: 1px solid #94a3b8; border-radius: 6px; padding: 8px 12px; background: #fff !important; word-break: keep-all; }
+            .print-check-box { width: 14px; height: 14px; border: 1.5px solid #004098; border-radius: 3px; flex-shrink: 0; }
+            .print-seat-box { border: 1px solid #1e293b; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; background: #f8fafc !important; page-break-inside: avoid; }
+            .print-seat-box h3 { font-size: 12.5px; font-weight: 800; color: #004098; margin: 0 0 5px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; }
+            .print-seat-box ul { list-style: none; margin: 0; padding: 0; }
+            .print-seat-box li { position: relative; padding-left: 11px; font-size: 11px; line-height: 1.42; color: #1e293b; margin-bottom: 3px; word-break: keep-all; }
+            .print-seat-box li:last-child { margin-bottom: 0; }
+            .print-seat-box li::before { content: '■'; font-size: 7px; position: absolute; left: 0; top: 4px; color: #004098; }
+            .print-qr-panel { display: flex; gap: 14px; align-items: center; border: 2px solid #004098; border-radius: 10px; padding: 12px 16px; background: #f8fafc !important; margin-top: auto; }
+            .print-qr-panel img { width: 108px; height: 108px; flex-shrink: 0; border: 1px solid #e2e8f0; background: #fff; }
+            .print-qr-panel h3 { font-size: 15px; font-weight: bold; color: #004098; margin: 0 0 4px; word-break: keep-all; }
+            .print-qr-panel p { font-size: 12px; line-height: 1.45; color: #334155; margin: 0 0 4px; word-break: keep-all; }
+            .print-qr-url { font-size: 11.5px; font-weight: bold; color: #0f172a; word-break: break-all; }
+        }
+        #map-status { left: auto !important; right: 12px !important; top: 12px !important; max-width: min(52%, 280px); text-align: right; }
+    </style>
+</head>
+<body class="antialiased pb-20 md:pb-0">
+<div class="print:hidden">
+
+<header class="bg-white/95 backdrop-blur-md shadow-md sticky top-0 z-50 no-print">
+    <nav class="container mx-auto px-3 md:px-4 h-16 flex items-center gap-2">
+        <div class="flex items-center gap-2 shrink-0">
+            <a href="http://tourmaker.kr" target="_blank" rel="noopener">
+                <img src="assets/images/tourmaker-logo.png" alt="Tourmaker" class="h-7 md:h-8">
+            </a>
+            <span id="d-day-badge" class="hidden bg-cyan-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold whitespace-nowrap"></span>
+        </div>
+        <div class="flex-1 min-w-0 overflow-x-auto no-scrollbar">
+            <div class="flex items-center gap-0.5 md:gap-4 whitespace-nowrap pr-2">
+                <a href="#home" class="px-2.5 md:px-3 py-2 text-sm font-bold text-slate-600 hover:text-cyan-600 rounded-lg">홈</a>
+                <a href="#highlights" class="px-2.5 md:px-3 py-2 text-sm font-bold text-cyan-600 rounded-lg">핵심포인트</a>
+                <a href="#flight" class="px-2.5 md:px-3 py-2 text-sm font-medium text-slate-600 hover:text-cyan-600 rounded-lg">항공</a>
+                <a href="#seat-checkin" class="px-2.5 md:px-3 py-2 text-sm font-bold text-sky-700 hover:bg-sky-50 rounded-lg">좌석·체크인</a>
+                <a href="#map-section" class="px-2.5 md:px-3 py-2 text-sm font-bold text-purple-600 hover:text-purple-800 rounded-lg"><i class="fa-solid fa-map-location-dot mr-1"></i>동선지도</a>
+                <a href="#schedule" class="px-2.5 md:px-3 py-2 text-sm font-bold text-slate-800 hover:text-cyan-600 rounded-lg">세부일정</a>
+                <a href="#places" class="px-2.5 md:px-3 py-2 text-sm font-medium text-slate-600 hover:text-cyan-600 rounded-lg">탐방지</a>
+                <a href="#hotel" class="px-2.5 md:px-3 py-2 text-sm font-medium text-slate-600 hover:text-cyan-600 rounded-lg">호텔</a>
+                <a href="#widgets" class="px-2.5 md:px-3 py-2 text-sm font-medium text-slate-600 hover:text-cyan-600 rounded-lg">날씨/환율</a>
+                <a href="#china-prep" class="px-2.5 md:px-3 py-2 text-sm font-medium text-slate-600 hover:text-cyan-600 rounded-lg">알리페이</a>
+                <a href="#conversation" class="px-2.5 md:px-3 py-2 text-sm font-bold text-orange-500 hover:text-orange-700 rounded-lg">생존회화</a>
+                <a href="#check" class="px-2.5 md:px-3 py-2 text-sm font-medium text-slate-600 hover:text-cyan-600 rounded-lg">준비물</a>
+                <a href="#safety" class="px-2.5 md:px-3 py-2 text-sm font-bold text-red-600 rounded-lg">안전/긴급</a>
+                <a href="#ai-guide" class="px-2.5 md:px-3 py-2 text-sm font-bold text-indigo-600 hover:text-indigo-800 rounded-lg">AI안내</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div id="event-day-bar" class="hidden sticky top-16 z-40 bg-white/95 backdrop-blur-md border-b border-cyan-100 shadow-sm no-print">
+    <div class="container mx-auto px-4 py-2.5">
+        <div class="grid grid-cols-2 gap-2 max-w-lg mx-auto">
+            <button type="button" onclick="goToTodaySchedule()" class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border-2 border-cyan-600 bg-cyan-600 text-white font-bold text-sm shadow-sm active:scale-95 transition">
+                <i class="fa-solid fa-calendar-day"></i> 오늘의 일정
+            </button>
+            <button type="button" onclick="goToTodayRoute()" class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border-2 border-slate-300 bg-white text-slate-700 font-bold text-sm shadow-sm active:scale-95 transition">
+                <i class="fa-solid fa-route"></i> 당일 동선
+            </button>
+        </div>
+    </div>
+</div>
+
+<section id="home" class="hero-bg min-h-[72vh] flex items-center justify-center text-center px-4 relative">
+    <div class="animate-fade-in-up text-white z-10 w-full max-w-4xl">
+        <div class="inline-block bg-white px-4 py-2 rounded-2xl shadow-xl mb-6">
+            <img src="assets/images/kangwon-logo.jpg" alt="강원대학교" class="h-14 md:h-16 w-auto object-contain mix-blend-multiply" onerror="this.src='assets/images/kangwon-logo.svg'">
+        </div>
+        <div class="mb-2">
+            <p class="text-yellow-300 font-semibold text-base md:text-lg tracking-wide">강원대학교 × 투어메이커</p>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 drop-shadow-2xl font-[Nanum_Myeongjo]">항저우 AI 체험·실증<br><span class="text-cyan-300 mt-2 block">3박 4일</span></h1>
+        <div id="hero-message-container" class="mt-6 bg-black/45 backdrop-blur-sm rounded-2xl p-5 inline-block border border-white/20 max-w-3xl text-left md:text-center">
+            <p id="hero-date" class="text-lg md:text-xl text-slate-100 font-medium text-center">2027.04.26(월) ~ 04.29(목) · 항저우 · 3박 4일</p>
+            <p class="text-slate-200 text-sm mt-3 leading-relaxed">FlyZoo AI호텔 실증, AI Hangzhou 2027 박람회, 알리바바 시시·스마트리테일·도시브레인까지 — <strong class="text-white">대학 적용 과제로 연결하는 AI 체험·실증</strong> 프로그램입니다.</p>
+            <div class="mt-3 flex flex-wrap justify-center gap-2 text-xs">
+                <span class="bg-white/15 text-cyan-200 px-3 py-1 rounded-full border border-white/20 font-semibold">ICN T2 ↔ HGH</span>
+                <span class="bg-white/15 text-cyan-200 px-3 py-1 rounded-full border border-white/20 font-semibold">FlyZoo · 위항·시시 3박</span>
+                <span class="bg-white/15 text-cyan-200 px-3 py-1 rounded-full border border-white/20 font-semibold">박람회 · 기업방문 · 시장조사</span>
+            </div>
+            <p id="hero-dynamic-msg" class="text-cyan-300 font-bold mt-2 text-sm md:text-base hidden text-center"></p>
+        </div>
+    </div>
+</section>
+
+<section id="highlights" class="py-12 bg-white -mt-8 rounded-t-3xl relative z-10 shadow-[0_-5px_20px_rgba(0,0,0,0.1)]">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-10">
+            <span class="text-cyan-600 font-black tracking-widest text-xs uppercase">SPECIAL POINTS</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mt-2">항저우 AI 체험·실증의 3대 핵심</h2>
+            <p class="text-slate-500 mt-2 text-sm">호텔·박람회·기업·시장조사를 한 도시에서 압축적으로 경험합니다.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 shadow-sm">
+                <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center mb-4 text-3xl">🏨</div>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">FlyZoo AI호텔 1차 실증</h3>
+                <p class="text-slate-600 text-sm leading-relaxed mb-4">안면인식 체크인·엘리베이터·음성 IoT·로봇 배송을 조별 순차로 체험하며, 대학 행정·매점 적용 아이디어의 출발점으로 삼습니다.</p>
+                <span class="inline-block bg-amber-600 text-white text-xs px-2 py-1 rounded font-bold">위항·시시 · 3박</span>
+            </div>
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 shadow-sm">
+                <div class="w-14 h-14 bg-indigo-100 rounded-2xl flex items-center justify-center mb-4 text-3xl">📡</div>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">AI Hangzhou 2027 집중 관람</h3>
+                <p class="text-slate-600 text-sm leading-relaxed mb-4">항저우 국제박람센터에서 플랫폼·로봇·클라우드를 조별로 관람하고, 관심기업 1곳과 짧은 기술미팅을 진행합니다.</p>
+                <span class="inline-block bg-indigo-500 text-white text-xs px-2 py-1 rounded font-bold">체류 5.5h · 조별 미팅</span>
+            </div>
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 shadow-sm">
+                <div class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center mb-4 text-3xl">🧠</div>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">기업·시장조사 &amp; 도시브레인</h3>
+                <p class="text-slate-600 text-sm leading-relaxed mb-4">알리바바 시시(사전승인)·자율 시장조사·City Brain 방문과 조별 대학적용과제 발표로 학습을 정리합니다.</p>
+                <span class="inline-block bg-emerald-600 text-white text-xs px-2 py-1 rounded font-bold">사전협의 · 발표·강평</span>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto">
+            <h3 class="text-lg font-bold text-slate-800 mb-4 text-center">주요 방문·체험 코스</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+                <div class="bg-cyan-50 border border-cyan-100 rounded-xl p-4"><strong class="text-cyan-800">FlyZoo AI호텔</strong><p class="text-slate-600 mt-1 text-xs">체크인·IoT·로봇 배송 실증</p></div>
+                <div class="bg-cyan-50 border border-cyan-100 rounded-xl p-4"><strong class="text-cyan-800">AI Hangzhou 2027</strong><p class="text-slate-600 mt-1 text-xs">국제박람센터 · 조별 관람</p></div>
+                <div class="bg-cyan-50 border border-cyan-100 rounded-xl p-4"><strong class="text-cyan-800">허마셴성 등</strong><p class="text-slate-600 mt-1 text-xs">스마트 리테일·앱주문 관찰</p></div>
+                <div class="bg-cyan-50 border border-cyan-100 rounded-xl p-4"><strong class="text-cyan-800">알리바바 시시</strong><p class="text-slate-600 mt-1 text-xs">전시관·클라우드·AI Q&amp;A</p></div>
+                <div class="bg-cyan-50 border border-cyan-100 rounded-xl p-4"><strong class="text-cyan-800">미래과학기술성</strong><p class="text-slate-600 mt-1 text-xs">AI생태계·IT디바이스</p></div>
+                <div class="bg-cyan-50 border border-cyan-100 rounded-xl p-4"><strong class="text-cyan-800">도시브레인</strong><p class="text-slate-600 mt-1 text-xs">City Brain · 종합토론</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="flight" class="py-12 bg-slate-50 border-t border-slate-200">
+    <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto mb-8">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
+                <div class="bg-slate-800 px-6 py-4 flex flex-wrap justify-between items-center gap-2">
+                    <h3 class="font-bold text-white text-lg flex items-center gap-2"><i class="fa-solid fa-plane-departure text-cyan-400"></i> 항공 일정 (시간대)</h3>
+                    <span class="bg-amber-500 text-slate-900 text-xs px-3 py-1 rounded-full font-bold">항공사·편명 미확정</span>
+                </div>
+                <div class="p-6 md:p-8">
+                    <p class="text-xs text-center text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 mb-6 font-semibold">※ 이용 항공사·편명은 확정 후 안내합니다. 아래는 예정 시간대입니다.</p>
+                    <div class="grid md:grid-cols-2 gap-8 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <div class="flex flex-col items-center text-center">
+                            <span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-bold mb-3">출국 (2027.04.26 월) · ICN T2</span>
+                            <div class="flex items-center gap-3 w-full justify-center flex-wrap">
+                                <div><span class="block text-2xl md:text-3xl font-black text-slate-800">12:00~12:25</span><span class="text-sm text-slate-500 font-bold">인천(ICN) 출발</span></div>
+                                <div class="flex flex-col items-center w-16">
+                                    <div class="w-full h-[2px] bg-slate-300 relative my-1"><i class="fa-solid fa-plane text-slate-800 absolute -top-2 left-1/2 -translate-x-1/2 bg-white px-1"></i></div>
+                                    <span class="text-[10px] text-slate-400">집결 09:30</span>
+                                </div>
+                                <div><span class="block text-2xl md:text-3xl font-black text-slate-800">13:30~15:00</span><span class="text-sm text-slate-500 font-bold">항저우(HGH)</span></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center text-center pt-8 md:pt-0">
+                            <span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-bold mb-3">귀국 (2027.04.29 목) · HGH→ICN T2</span>
+                            <div class="flex items-center gap-3 w-full justify-center flex-wrap">
+                                <div><span class="block text-2xl md:text-3xl font-black text-slate-800">14:30~15:10</span><span class="text-sm text-slate-500 font-bold">항저우(HGH)</span></div>
+                                <div class="flex flex-col items-center w-16">
+                                    <div class="w-full h-[2px] bg-slate-300 relative my-1"><i class="fa-solid fa-plane text-slate-800 absolute -top-2 left-1/2 -translate-x-1/2 bg-white px-1"></i></div>
+                                    <span class="text-[10px] text-slate-400">강원권 21:00경</span>
+                                </div>
+                                <div><span class="block text-2xl md:text-3xl font-black text-slate-800">17:45~18:15</span><span class="text-sm text-slate-500 font-bold">인천(ICN)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+            <div class="bg-white rounded-xl p-4 border border-cyan-100 shadow-sm"><div class="text-cyan-600 text-2xl mb-2"><i class="fa-solid fa-clock"></i></div><h4 class="font-bold text-sm">ICN T2 집결 09:30</h4><p class="text-xs text-slate-600 mt-1">강원권→공항 이동 여유 확보</p></div>
+            <div class="bg-white rounded-xl p-4 border border-cyan-100 shadow-sm"><div class="text-cyan-600 text-2xl mb-2"><i class="fa-solid fa-passport"></i></div><h4 class="font-bold text-sm">입국·수하물</h4><p class="text-xs text-slate-600 mt-1">HGH 도착 후 약 90~100분</p></div>
+            <div class="bg-white rounded-xl p-4 border border-cyan-100 shadow-sm"><div class="text-cyan-600 text-2xl mb-2"><i class="fa-solid fa-battery-half"></i></div><h4 class="font-bold text-sm">보조배터리 규정</h4><p class="text-xs text-slate-600 mt-1"><span class="text-red-600 font-bold">기내 휴대 필수</span> · 선반보관·기내충전 금지</p></div>
+            <div class="bg-white rounded-xl p-4 border border-cyan-100 shadow-sm"><div class="text-cyan-600 text-2xl mb-2"><i class="fa-solid fa-bus"></i></div><h4 class="font-bold text-sm">귀국 후 이동</h4><p class="text-xs text-slate-600 mt-1">전용버스 강원권 복귀 21:00경</p></div>
+        </div>
+    </div>
+</section>
+
+
+<section id="seat-checkin" class="py-16 bg-sky-50/70 border-t border-sky-100">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <div class="text-center mb-8">
+            <span class="inline-block bg-[#004098] text-white text-xs px-3 py-1 rounded-full font-bold shadow-sm mb-3">SEAT &amp; ONLINE CHECK-IN</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-800">사전좌석배정 · 온라인 체크인 안내</h2>
+            <p class="text-slate-600 mt-2 text-sm"><strong>항공권 발권(E-티켓 발행) 완료 후</strong> 개별 사전좌석배정과 온라인 체크인을 권장합니다. (대학생·청년 단체)</p>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-md border border-sky-100 p-6 md:p-8 mb-5">
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-900 font-semibold mb-5">
+                ※ 이용 항공사·편명 확정 후 항공사 앱·홈페이지 기준의 세부 오픈 시각을 안내합니다. 아래는 국제선 일반 권장 기준입니다.
+            </div>
+            <div class="grid sm:grid-cols-3 gap-3 mb-5">
+                <div class="rounded-2xl bg-sky-50 border border-sky-100 p-4 text-center">
+                    <p class="font-bold text-slate-800 text-sm">개별 사전좌석 권장</p>
+                    <span class="inline-block text-[11px] font-bold text-sky-700 bg-white px-2.5 py-0.5 rounded-full border border-sky-200 mt-1">발권(E-티켓) 완료 후</span>
+                </div>
+                <div class="rounded-2xl bg-emerald-50 border border-emerald-100 p-4 text-center">
+                    <p class="font-bold text-slate-800 text-sm">온라인 체크인 (권장)</p>
+                    <span class="inline-block text-[11px] font-bold text-emerald-700 bg-white px-2.5 py-0.5 rounded-full border border-emerald-200 mt-1">출발 48시간 ~ 1시간 전</span>
+                </div>
+                <div class="rounded-2xl bg-amber-50 border border-amber-100 p-4 text-center">
+                    <p class="font-bold text-slate-800 text-sm">공항 집결 · 수하물</p>
+                    <span class="inline-block text-[11px] font-bold text-amber-700 bg-white px-2.5 py-0.5 rounded-full border border-amber-200 mt-1">ICN T2 09:30 집결</span>
+                </div>
+            </div>
+            <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 text-xs text-slate-600 space-y-1.5">
+                <p><strong class="text-[#004098]">가는 편 ICN→HGH</strong> · 통상 출발 48시간 전 온라인 체크인 오픈 ~ 출발 약 1시간 전 마감 (항공사 확정 후 세부 안내)</p>
+                <p><strong class="text-[#004098]">오는 편 HGH→ICN</strong> · 해외 출발 공항 온라인 체크인 가능 여부는 항공사·노선에 따라 다름 · 미지원 시 공항 키오스크·카운터</p>
+                <p class="text-slate-500">온라인 체크인 후에도 출국 당일 미팅 시간에 맞춰 집결해 주세요. 위탁수하물은 카운터 접수가 필요합니다.</p>
+            </div>
+        </div>
+
+        <div id="powerbank" class="mt-6 bg-rose-50/90 rounded-3xl border-2 border-rose-200 p-6 md:p-8 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-rose-200/80">
+                <div class="flex items-center gap-2.5">
+                    <span class="bg-rose-600 text-white w-8 h-8 rounded-xl flex items-center justify-center text-sm shadow-sm shrink-0">
+                        <i class="fa-solid fa-battery-exclamation"></i>
+                    </span>
+                    <div>
+                        <h3 class="font-extrabold text-slate-800 text-base md:text-lg">보조배터리 및 전자담배 기내반입 기준 안내</h3>
+                        <p class="text-xs text-rose-700 font-semibold">대부분 항공사 공통 안전 규정 — 출국 전 전원 확인</p>
+                    </div>
+                </div>
+                <span class="bg-white text-rose-700 border border-rose-300 text-xs font-extrabold px-3 py-1 rounded-full">위탁 수하물 절대 금지</span>
+            </div>
+            <div class="grid md:grid-cols-2 gap-3 text-xs md:text-sm text-slate-700">
+                <div class="bg-white rounded-2xl p-4 border border-rose-100 flex items-start gap-3">
+                    <i class="fa-solid fa-ban text-rose-600 mt-0.5 shrink-0"></i>
+                    <div>
+                        <p class="font-bold text-slate-800">기내 사용 및 충전 금지 (위탁 수하물 금지)</p>
+                        <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">부치는 큰 가방에 넣을 수 없으며, <strong>비행기 안에서도 보조배터리 사용·충전이 금지</strong>됩니다.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-rose-100 flex items-start gap-3">
+                    <i class="fa-solid fa-hand-holding-hand text-rose-600 mt-0.5 shrink-0"></i>
+                    <div>
+                        <p class="font-bold text-slate-800">기내 선반(머리 위 짐칸) 보관 불가</p>
+                        <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">선반 가방에 넣지 말고, <strong>직접 휴대하거나 좌석 앞주머니</strong>에 보관해 주세요.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-rose-100 flex items-start gap-3">
+                    <i class="fa-solid fa-shield-halved text-rose-600 mt-0.5 shrink-0"></i>
+                    <div>
+                        <p class="font-bold text-slate-800">단락 방지 조치 필수</p>
+                        <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">단자에 <strong>절연테이프</strong> 또는 <strong>투명 비닐백 개별 보관</strong> · 전자담배는 <strong>전원 OFF</strong></p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-rose-100 flex items-start gap-3">
+                    <i class="fa-solid fa-bolt text-rose-600 mt-0.5 shrink-0"></i>
+                    <div>
+                        <p class="font-bold text-slate-800">용량 · 개수 제한</p>
+                        <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">1인 <strong>최대 2개</strong> · <strong>160Wh 초과 불가</strong> (100~160Wh는 카운터 승인 / 파손·리콜 제품 금지)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-center text-xs text-slate-500 mt-5">※ 항공사 정책·당일 공항 사정에 따라 변동될 수 있습니다.</p>
+    </div>
+</section>
+
+
+<section id="map-section" class="py-16 bg-slate-50 border-t border-slate-200 overflow-hidden relative">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-8 relative z-20">
+            <span class="text-purple-600 font-bold tracking-wider uppercase text-sm bg-purple-100 px-4 py-1.5 rounded-full border border-purple-200 shadow-sm"><i class="fa-solid fa-map-location-dot mr-1"></i> SMART ROUTE</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mt-5">한눈에 보는 동선 지도</h2>
+            <p class="text-slate-500 mt-3 text-sm font-medium">실제 도로를 따라 이동 순서가 천천히 그려집니다. 항공 구간만 점선입니다.</p>
+            <p id="map-hint" class="text-slate-400 mt-1 text-xs">항저우 입성부터 귀국까지</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-2 mb-6 relative z-20">
+            <button onclick="filterMap('all')" id="btn-map-all" class="map-btn bg-purple-600 text-white font-bold px-4 py-2.5 rounded-xl shadow-md border border-purple-600 transition text-sm">전체 여정</button>
+            <button onclick="filterMap('day1')" id="btn-map-day1" class="map-btn bg-white text-slate-600 font-bold px-4 py-2.5 rounded-xl shadow-sm border border-slate-200 hover:bg-slate-50 transition text-sm">1일차 입성</button>
+            <button onclick="filterMap('day2')" id="btn-map-day2" class="map-btn bg-white text-slate-600 font-bold px-4 py-2.5 rounded-xl shadow-sm border border-slate-200 hover:bg-slate-50 transition text-sm">2일차 박람회</button>
+            <button onclick="filterMap('day3')" id="btn-map-day3" class="map-btn bg-white text-slate-600 font-bold px-4 py-2.5 rounded-xl shadow-sm border border-slate-200 hover:bg-slate-50 transition text-sm">3일차 기업·조사</button>
+            <button onclick="filterMap('day4')" id="btn-map-day4" class="map-btn bg-white text-slate-600 font-bold px-4 py-2.5 rounded-xl shadow-sm border border-slate-200 hover:bg-slate-50 transition text-sm">4일차 귀국</button>
+        </div>
+        <div class="max-w-5xl mx-auto border border-slate-200 rounded-2xl p-1 shadow-2xl bg-white relative z-10">
+            <div id="map"></div>
+            <div id="map-distance" class="hidden absolute top-3 right-3 z-[400] bg-white/92 backdrop-blur px-3 py-2 rounded-xl shadow pointer-events-none text-right">
+                <p class="text-[10px] font-bold text-slate-400 tracking-wide">대략 이동</p>
+                <p id="map-distance-leg" class="font-bold text-xs text-slate-800 leading-snug mt-0.5"></p>
+                <p id="map-distance-time" class="font-black text-sm text-purple-600 mt-0.5"></p>
+                <p id="map-distance-km" class="text-[10px] font-bold text-slate-500 mt-0.5"></p>
+            </div>
+            <div class="map-zoom-btns">
+                <button type="button" onclick="mapZoom(1)" aria-label="줌인">+</button>
+                <button type="button" onclick="mapZoom(-1)" aria-label="줌아웃">−</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="schedule" class="py-16 bg-white border-t border-slate-200">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                <div class="text-center sm:text-left">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-800">세부 탐방 일정</h2>
+                    <p class="text-slate-500 text-sm mt-1">탭을 눌러 일자별 일정과 식사·숙박을 확인하세요.</p>
+                </div>
+                <div class="text-center sm:text-right shrink-0 no-print">
+                    <button type="button" onclick="handlePrint()" class="inline-flex items-center justify-center gap-1.5 bg-slate-800 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:bg-slate-700 transition"><i class="fa-solid fa-print"></i> 일정표 인쇄하기</button>
+                    <p class="mt-2 text-xs text-slate-500 leading-relaxed max-w-[16rem] mx-auto sm:ml-auto sm:mr-0">모바일(카카오톡 등)에서는<br>인쇄가 어려울 수 있어요.<br>다른 브라우저나 PC에서 열어 주세요.</p>
+                </div>
+            </div>
+            <div class="text-center mb-8 space-y-2">
+                <p class="text-xs text-slate-600 font-medium">※ 기업방문은 사전승인·협의 조건이며, 항공 연발착 및 현지 사정에 의해 변동될 수 있습니다.</p>
+            </div>
+            <div class="flex overflow-x-auto no-scrollbar gap-2 mb-8 justify-start md:justify-center px-2">
+                <button class="tab-btn active shrink-0 px-5 py-2.5 rounded-xl border border-cyan-600 bg-cyan-600 text-white font-bold text-sm transition" onclick="openTab(event, 'day1')">1일차(4/26 월)</button>
+                <button class="tab-btn shrink-0 px-5 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-500 font-bold text-sm transition" onclick="openTab(event, 'day2')">2일차(4/27 화)</button>
+                <button class="tab-btn shrink-0 px-5 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-500 font-bold text-sm transition" onclick="openTab(event, 'day3')">3일차(4/28 수)</button>
+                <button class="tab-btn shrink-0 px-5 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-500 font-bold text-sm transition" onclick="openTab(event, 'day4')">4일차(4/29 목)</button>
+            </div>
+            <div class="bg-slate-50 rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+                <div id="day1" class="tab-content animate-fade-in-up p-6 md:p-8">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                        <div class="flex items-center gap-4">
+                            <span class="text-4xl bg-cyan-100 p-3 rounded-2xl">🛫</span>
+                            <div><h3 class="font-bold text-2xl text-slate-800">입성 · FlyZoo AI 1차 실증</h3><p class="text-cyan-600 font-medium">2027.04.26(월) · ICN → HGH · 위항·시시</p></div>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-600 font-semibold shadow-sm">
+                            <span class="text-cyan-700 font-bold">식사</span> 조: 개인 / 중: 기내식 / 석: 현지식
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="relative pl-8 border-l-2 border-cyan-100"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-cyan-600"></div><h4 class="font-bold text-lg">09:30 ICN T2 집결·수속</h4><p class="text-slate-500 text-sm mt-1">강원권→공항 이동 여유 확보 · 단체 수속</p></div>
+                        <div class="relative pl-8 border-l-2 border-cyan-100"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-sky-500"></div><h4 class="font-bold text-lg">12:00~12:25경 ICN 출발 → 13:30~15:00경 HGH 도착</h4><p class="text-slate-500 text-sm mt-1">기내식 · 입국·수하물 약 90~100분 (항공사·편명 미확정)</p></div>
+                        <div class="relative pl-8 border-l-2 border-cyan-100"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-indigo-500"></div><h4 class="font-bold text-lg">15:00~16:30 전용버스 위항·시시 권역</h4><p class="text-slate-500 text-sm mt-1">약 90분 이동</p></div>
+                        <div class="relative pl-8 border-l-2 border-cyan-100"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-violet-500"></div><h4 class="font-bold text-lg">16:30~18:30 FlyZoo 체크인 + 호텔 AI 1차 실증</h4><p class="text-slate-500 text-sm mt-1 mb-3">10명×3조 순차 체크인 · 브리핑 30~60분 · 안면인식 동의자 엘리베이터·객실 · 음성 IoT</p><img src="assets/images/venue-flyzoo.jpg" alt="플라이주 AI 호텔" class="schedule-thumb"></div>
+                        <div class="relative pl-8 border-l-2 border-transparent"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-amber-500"></div><h4 class="font-bold text-lg">18:30~20:30 단체 석식(환영만찬) + 로봇 배송 순차 실증</h4><p class="text-slate-500 text-sm mt-1">조별 대표객실 2건·총 6건 · HOTEL FlyZoo (3박 전 일정)</p></div>
+                    </div>
+                </div>
+                <div id="day2" class="tab-content hidden animate-fade-in-up p-6 md:p-8">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                        <div class="flex items-center gap-4">
+                            <span class="text-4xl bg-indigo-100 p-3 rounded-2xl">📡</span>
+                            <div><h3 class="font-bold text-2xl text-slate-800">AI Hangzhou 2027 · 스마트리테일</h3><p class="text-indigo-600 font-medium">2027.04.27(화) · 국제박람센터 · 호텔권역</p></div>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-600 font-semibold shadow-sm">
+                            <span class="text-indigo-700 font-bold">식사</span> 조: 호텔식 / 중: 자율식 / 석: 현지식
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="relative pl-8 border-l-2 border-indigo-100"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-cyan-600"></div><h4 class="font-bold text-lg">08:00~09:30 조식 후 박람회장 이동</h4><p class="text-slate-500 text-sm mt-1">이동 90분 확보 → 항저우 국제박람센터</p></div>
+                        <div class="relative pl-8 border-l-2 border-indigo-100"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-indigo-500"></div><h4 class="font-bold text-lg">09:30~15:00 AI Hangzhou 2027 집중 관람</h4><p class="text-slate-500 text-sm mt-1 mb-2">체류 5.5h · 순수관람 4.5h+</p>
+                            <ul class="text-sm text-slate-600 space-y-1 list-disc pl-5">
+                                <li>오전 09:30~12:00 조별 — 1조 AI플랫폼·스마트시티·도시데이터 / 2조 로봇·스마트유통·물류 / 3조 클라우드·컴퓨팅</li>
+                                <li>중식 12:00~13:00 박람회장 자율식</li>
+                                <li>오후 13:00~15:00 조별 관심기업 1곳 부스·30분 기술미팅</li>
+                            </ul>
+                        </div>
+                        <div class="relative pl-8 border-l-2 border-indigo-100"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-orange-500"></div><h4 class="font-bold text-lg">15:00~16:30 박람회장 → 호텔권역 이동</h4></div>
+                        <div class="relative pl-8 border-l-2 border-indigo-100"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-rose-500"></div><h4 class="font-bold text-lg">16:30~18:00 스마트 리테일 관찰</h4><p class="text-slate-500 text-sm mt-1">허마셴성 등 · 앱주문·결제·컨베이어 피킹</p></div>
+                        <div class="relative pl-8 border-l-2 border-transparent"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-amber-500"></div><h4 class="font-bold text-lg">18:00~20:00 단체석식 + 대학 적용 아이디어 1차 토론</h4><p class="text-slate-500 text-sm mt-1">매점·도서관·행정 적용 · HOTEL FlyZoo</p></div>
+                    </div>
+                </div>
+                <div id="day3" class="tab-content hidden animate-fade-in-up p-6 md:p-8">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                        <div class="flex items-center gap-4">
+                            <span class="text-4xl bg-violet-100 p-3 rounded-2xl">🏢</span>
+                            <div><h3 class="font-bold text-2xl text-slate-800">알리바바 시시 · 조별 시장조사</h3><p class="text-violet-600 font-medium">2027.04.28(수) · 시시 · 미래과학기술성</p></div>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-600 font-semibold shadow-sm">
+                            <span class="text-violet-700 font-bold">식사</span> 조: 호텔식 / 중: 자율 / 석: 자율
+                        </div>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6 text-sm text-amber-900 font-semibold">
+                        ※ 알리바바 시시 캠퍼스 방문은 사전승인 조건입니다. 승인·일정에 따라 조정될 수 있습니다.
+                    </div>
+                    <div class="space-y-6">
+                        <div class="relative pl-8 border-l-2 border-violet-100"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-cyan-600"></div><h4 class="font-bold text-lg">09:00~11:30 알리바바 시시 캠퍼스 방문 협의</h4><p class="text-slate-500 text-sm mt-1 mb-3">전시관·디지털생태계·클라우드·AI Q&amp;A</p><img src="assets/images/venue-alibaba-atrium.jpg" alt="알리바바 시시" class="schedule-thumb"></div>
+                        <div class="relative pl-8 border-l-2 border-violet-100"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-indigo-500"></div><h4 class="font-bold text-lg">12:00~20:00 조별 자율 시장조사</h4>
+                            <ul class="text-sm text-slate-600 space-y-1 list-disc pl-5 mt-1">
+                                <li>주제1 무인상점·로봇조리/서빙·스마트오더</li>
+                                <li>주제2 미래과학기술성(未来科技城) AI생태계·IT디바이스 매장</li>
+                                <li>주제3 알리페이 스마트 대중교통·모빌리티 외국인 UX</li>
+                            </ul>
+                        </div>
+                        <div class="relative pl-8 border-l-2 border-transparent"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-slate-400"></div><h4 class="font-bold text-lg">20:00~21:30 호텔 조별 결과 정리 · 익일 발표자료</h4><p class="text-slate-500 text-sm mt-1">HOTEL FlyZoo</p></div>
+                    </div>
+                </div>
+                <div id="day4" class="tab-content hidden animate-fade-in-up p-6 md:p-8">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                        <div class="flex items-center gap-4">
+                            <span class="text-4xl bg-sky-100 p-3 rounded-2xl">🛬</span>
+                            <div><h3 class="font-bold text-2xl text-slate-800">도시브레인 · 발표 · 귀국</h3><p class="text-sky-600 font-medium">2027.04.29(목) · City Brain · HGH → ICN</p></div>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-600 font-semibold shadow-sm">
+                            <span class="text-sky-700 font-bold">식사</span> 조: 호텔식 / 중: 현지식 / 석: 기내식
+                        </div>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6 text-sm text-amber-900 font-semibold">
+                        ※ 도시브레인(City Brain) 방문은 사전협의 조건입니다.
+                    </div>
+                    <div class="space-y-6">
+                        <div class="relative pl-8 border-l-2 border-sky-100"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-cyan-600"></div><h4 class="font-bold text-lg">08:30~10:00 체크아웃 후 도시브레인 방문</h4><p class="text-slate-500 text-sm mt-1">사전협의</p></div>
+                        <div class="relative pl-8 border-l-2 border-sky-100"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-emerald-500"></div><h4 class="font-bold text-lg">10:00~11:40 종합토론 · 조별 대학적용과제 1건 발표 + 강평 + 오찬</h4><p class="text-slate-500 text-sm mt-1">현지식 오찬</p></div>
+                        <div class="relative pl-8 border-l-2 border-sky-100"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-indigo-500"></div><h4 class="font-bold text-lg">11:40~12:30 HGH 이동</h4><p class="text-slate-500 text-sm mt-1">출발 약 2시간 30분 전 공항 도착</p></div>
+                        <div class="relative pl-8 border-l-2 border-transparent"><div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-red-500"></div>
+                            <div class="bg-red-50 p-5 rounded-2xl border border-red-200">
+                                <p class="font-bold text-slate-800 mb-2">14:30~15:10경 HGH 출발 → 17:45~18:15경 ICN T2 도착</p>
+                                <p class="text-sm text-slate-600">전용버스 강원권 복귀 21:00경 · 항공사·편명 미확정</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="places" class="py-16 bg-slate-50 border-t border-slate-200">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-10">
+            <span class="text-cyan-600 font-black tracking-widest text-xs uppercase">VISIT NOTES</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mt-2">핵심 탐방지 한눈에</h2>
+            <p class="text-slate-500 mt-2 text-sm">2027 항저우 AI 체험·실증 주요 방문지</p>
+        </div>
+        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                <img src="assets/images/venue-flyzoo.jpg" alt="FlyZoo AI호텔" class="w-full h-44 object-cover">
+                <div class="p-5"><span class="text-xs font-bold text-violet-600">전 일정 · 위항·시시</span><h3 class="font-bold text-lg text-slate-800 mt-0.5">FlyZoo AI호텔 (플라이주)</h3><p class="text-sm text-slate-600 mt-2">안면인식 체크인·음성 IoT·로봇 배송을 조별 순차로 실증하는 숙박·학습 거점입니다. 3박 전 일정.</p></div>
+            </article>
+            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                <img src="assets/images/og-thumb-2027.jpg" alt="AI Hangzhou 2027" class="w-full h-44 object-cover">
+                <div class="p-5"><span class="text-xs font-bold text-indigo-600">2일차 · 박람회</span><h3 class="font-bold text-lg text-slate-800 mt-0.5">AI Hangzhou 2027 / 국제박람센터</h3><p class="text-sm text-slate-600 mt-2">조별 테마 관람과 관심기업 1곳 기술미팅으로 AI 산업 현장을 집중 관찰합니다.</p></div>
+            </article>
+            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                <img src="assets/images/venue-alibaba-atrium.jpg" alt="알리바바 시시" class="w-full h-44 object-cover">
+                <div class="p-5"><span class="text-xs font-bold text-amber-600">3일차 오전</span><h3 class="font-bold text-lg text-slate-800 mt-0.5">알리바바 시시 캠퍼스</h3><p class="text-sm text-slate-600 mt-2">전시관·디지털생태계·클라우드·AI Q&amp;A. ※사전승인 조건</p></div>
+            </article>
+            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                <img src="assets/images/venue-tech.jpg" alt="허마셴성 스마트리테일" class="w-full h-44 object-cover">
+                <div class="p-5"><span class="text-xs font-bold text-rose-600">2일차 오후</span><h3 class="font-bold text-lg text-slate-800 mt-0.5">허마셴성 등 스마트 리테일</h3><p class="text-sm text-slate-600 mt-2">앱주문·결제·컨베이어 피킹 등 신유통 동선을 관찰합니다.</p></div>
+            </article>
+            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                <img src="assets/images/venue-robot-2027.jpg" alt="미래과학기술성" class="w-full h-44 object-cover">
+                <div class="p-5"><span class="text-xs font-bold text-cyan-600">3일차 자율</span><h3 class="font-bold text-lg text-slate-800 mt-0.5">미래과학기술성 (未来科技城)</h3><p class="text-sm text-slate-600 mt-2">AI생태계·IT디바이스 매장 등 조별 시장조사 대표 동선입니다.</p></div>
+            </article>
+            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                <img src="assets/images/og-thumb-2027.jpg" alt="도시브레인" class="w-full h-44 object-cover">
+                <div class="p-5"><span class="text-xs font-bold text-emerald-600">4일차 오전</span><h3 class="font-bold text-lg text-slate-800 mt-0.5">도시브레인 (City Brain)</h3><p class="text-sm text-slate-600 mt-2">스마트시티 운영 사례 방문 후 조별 대학적용과제 발표·강평으로 이어집니다. ※사전협의</p></div>
+            </article>
+        </div>
+    </div>
+</section>
+
+
+
+<section id="hotel" class="py-16 bg-white border-t border-slate-200">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-8">
+            <span class="text-violet-600 font-black tracking-widest text-xs uppercase">STAY</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mt-2">숙박 안내</h2>
+            <p class="text-slate-500 mt-2 text-sm">FlyZoo Hotel (플라이주) · 위항·시시 권역 · 3박 전 일정</p>
+        </div>
+        <div class="max-w-3xl mx-auto">
+            <article class="bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden shadow-sm">
+                <div class="grid grid-cols-2 gap-1 bg-slate-200">
+                    <div class="relative">
+                        <img src="assets/images/venue-flyzoo.jpg" alt="플라이주 AI 호텔 전경" class="w-full h-44 object-cover">
+                        <span class="absolute bottom-2 left-2 bg-slate-900/75 text-white text-[11px] font-bold px-2 py-0.5 rounded">호텔 전경</span>
+                    </div>
+                    <div class="relative">
+                        <img src="assets/images/venue-flyzoo-room.jpg" alt="플라이주 AI 호텔 객실" class="w-full h-44 object-cover">
+                        <span class="absolute bottom-2 left-2 bg-slate-900/75 text-white text-[11px] font-bold px-2 py-0.5 rounded">객실</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <p class="text-xs font-bold text-violet-600 mb-1">1~3일차 (3박) · 항저우 위항·시시</p>
+                    <h3 class="font-bold text-lg text-slate-800 mb-1">FlyZoo Hotel (플라이주) AI 호텔</h3>
+                    <p class="text-sm text-slate-700 font-semibold mb-2">阿里未来酒店 · 시시 권역</p>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">안면인식 체크인, 객실 음성 IoT, 로봇 룸서비스 등 AI 숙박을 직접 실증합니다. 10명×3조 순차 체크인·브리핑 후 로봇 배송 실증(조별 대표객실)을 진행합니다.</p>
+                    <ul class="text-xs text-slate-600 space-y-1.5">
+                        <li><i class="fa-solid fa-check text-violet-500 mr-1.5"></i>안면인식 동의자 엘리베이터·객실</li>
+                        <li><i class="fa-solid fa-check text-violet-500 mr-1.5"></i>음성 IoT · 로봇 배송 순차 실증</li>
+                        <li><i class="fa-solid fa-check text-violet-500 mr-1.5"></i>알리바바 시시·스마트리테일 동선과 연계</li>
+                    </ul>
+                    <p class="text-xs text-slate-500 mt-4">※ 호텔 및 서비스는 현지 사정에 따라 변동될 수 있습니다.</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+
+<section id="widgets" class="py-12 bg-blue-50 border-t border-slate-200">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-10">
+            <span class="text-blue-600 font-bold tracking-wider uppercase text-sm">LOCAL INFO</span>
+            <h2 class="text-3xl font-bold text-slate-800 mt-2">현지 정보 브리핑</h2>
+            <p class="text-slate-500 mt-2 text-sm">항저우 기준 날씨와 위안화 물가 정보</p>
+        </div>
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-2xl shadow-md border border-blue-100 flex flex-col">
+                <h3 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2"><i class="fa-solid fa-cloud-sun text-blue-500"></i> 5일 날씨 예보 (항저우)</h3>
+                <div id="weather-container" class="grid grid-cols-5 gap-2 mb-4"><div class="text-center text-sm text-slate-500 col-span-5 py-4">날씨 정보를 불러오는 중...</div></div>
+                <div class="mt-auto bg-blue-50 p-3 rounded-xl border border-blue-100 text-xs text-slate-700">
+                    <strong>옷차림:</strong> 4월 항저우는 봄 환절기로 일교차가 큽니다. <span class="text-blue-600 font-bold">얇은 겉옷·레이어드</span>를 준비하고, 비 올 수 있으니 접이식 우산을 권장합니다.
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-md border border-blue-100">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-lg text-slate-800 flex items-center gap-2"><i class="fa-solid fa-money-bill-transfer text-emerald-500"></i> 체감 환율 및 물가</h3>
+                    <span id="rate-date" class="text-[10px] text-slate-400">업데이트 중...</span>
+                </div>
+                <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 mb-4 text-center">
+                    <p class="text-xs text-slate-500 mb-1">CNY 체감 환율 <span class="text-[10px] text-red-500">(수수료 1.5% 반영)</span></p>
+                    <p class="text-2xl font-black text-emerald-700">1 CNY = <span id="exchange-rate">...</span> 원</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-5">
+                    <h4 class="text-sm font-bold text-slate-700 mb-3"><i class="fa-solid fa-calculator text-emerald-600"></i> 환율 계산기</h4>
+                    <div class="flex items-center gap-3">
+                        <div class="flex-1 relative"><input type="number" id="calc-cny" class="w-full bg-white border border-slate-300 rounded-lg py-2 pl-3 pr-8 text-right font-bold" placeholder="0" min="0"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm">¥</span></div>
+                        <i class="fa-solid fa-arrow-right text-slate-400"></i>
+                        <div class="flex-1 relative"><input type="text" id="calc-krw" class="w-full bg-slate-100 border border-slate-200 rounded-lg py-2 pl-3 pr-8 text-right font-bold text-emerald-700" placeholder="0" readonly><span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm">₩</span></div>
+                    </div>
+                </div>
+                <h4 class="text-sm font-bold text-slate-700 mb-3 border-b pb-2">현지 물가 비교</h4>
+                <div id="price-list" class="space-y-3 text-sm"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="china-prep" class="py-12 bg-white border-t border-slate-200">
+    <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto text-center mb-8">
+            <span class="inline-block bg-blue-600 text-white text-xs px-3 py-1 rounded-full font-bold shadow-sm mb-3">학생 필독</span>
+            <h2 class="text-3xl font-bold text-slate-800">알리페이 &amp; 현지 앱 준비</h2>
+            <p class="text-slate-600 mt-2">현금 사용이 어려운 지역이 많습니다. 카카오톡·구글·인스타는 접속이 원활하지 않을 수 있어 VPN 또는 로밍 네트워크를 확인하세요. 전압은 220V이나 플러그 모양이 다르니 멀티 어댑터를 준비하세요.</p>
+        </div>
+        <div class="max-w-4xl mx-auto bg-slate-50 rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="grid md:grid-cols-2">
+                <div class="p-8">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">한국 카드 연동하기</h3>
+                    <ol class="space-y-4 text-sm text-slate-600 text-left">
+                        <li class="flex gap-3"><span class="bg-blue-100 text-blue-600 w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">1</span><span>알리페이 또는 위챗 앱을 미리 설치·가입합니다.</span></li>
+                        <li class="flex gap-3"><span class="bg-blue-100 text-blue-600 w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">2</span><span>신용/체크카드를 결제수단으로 등록합니다.</span></li>
+                        <li class="flex gap-3"><span class="bg-blue-100 text-blue-600 w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">3</span><span>상점 QR을 스캔하면 원화로 자동 환전 결제됩니다.</span></li>
+                    </ol>
+                </div>
+                <div class="bg-blue-100/50 p-8 flex items-center justify-center border-l border-blue-100">
+                    <p class="text-xs text-slate-600 font-medium leading-relaxed text-center">자판기·편의점·길거리 간식까지<br>대부분 <strong class="text-blue-600">QR코드</strong>로 결제합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="conversation" class="py-12 bg-orange-50 border-t border-orange-100">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-8">
+            <span class="text-orange-600 font-bold tracking-wider uppercase text-sm">SURVIVAL CHINESE</span>
+            <h2 class="text-2xl font-bold text-slate-800 mt-2"><i class="fa-solid fa-language text-orange-500"></i> 원클릭 생존 회화</h2>
+            <p class="text-slate-500 mt-1 text-sm">버튼을 눌러 현지인에게 화면을 보여주세요.</p>
+        </div>
+        <div class="max-w-4xl mx-auto space-y-8">
+            <div>
+                <h3 class="font-bold text-slate-700 mb-3 ml-2">식당 &amp; 쇼핑</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <button onclick="showPhrase('🍺', '시원한 맥주/물 주세요', '피지우/쉐이 삥더', '请给我冰啤酒/水')" class="bg-white p-3 rounded-xl shadow-sm border border-orange-200 hover:bg-orange-100 transition text-center"><div class="text-2xl mb-1">🍺</div><div class="text-xs font-bold">시원한 맥주/물</div></button>
+                    <button onclick="showPhrase('🌿', '고수 빼주세요', '부야오 샹차이', '不要香菜')" class="bg-white p-3 rounded-xl shadow-sm border border-orange-200 hover:bg-orange-100 transition text-center"><div class="text-2xl mb-1">🌿</div><div class="text-xs font-bold">고수 빼주세요</div></button>
+                    <button onclick="showPhrase('🧾', '계산할게요 (알리페이)', '마이단, 쯔푸바오', '买单，支付宝')" class="bg-white p-3 rounded-xl shadow-sm border border-orange-200 hover:bg-orange-100 transition text-center"><div class="text-2xl mb-1">🧾</div><div class="text-xs font-bold">계산 (알리페이)</div></button>
+                    <button onclick="showPhrase('💰', '이거 얼마예요?', '쩌거 뚜어샤오 치앤?', '这个多少钱？')" class="bg-white p-3 rounded-xl shadow-sm border border-orange-200 hover:bg-orange-100 transition text-center"><div class="text-2xl mb-1">💰</div><div class="text-xs font-bold">얼마예요?</div></button>
+                    <button onclick="showPhrase('📉', '조금만 깎아주세요', '피앤이 이디앤바', '便宜一点吧')" class="bg-white p-3 rounded-xl shadow-sm border border-orange-200 hover:bg-orange-100 transition text-center"><div class="text-2xl mb-1">📉</div><div class="text-xs font-bold">깎아주세요</div></button>
+                    <button onclick="showPhrase('🚫', '고수/매운맛 빼주세요', '부야오 샹차이/부야오 라', '不要香菜/不要辣')" class="bg-white p-3 rounded-xl shadow-sm border border-orange-200 hover:bg-orange-100 transition text-center"><div class="text-2xl mb-1">🚫</div><div class="text-xs font-bold">맵지 않게</div></button>
+                </div>
+            </div>
+            <div>
+                <h3 class="font-bold text-slate-700 mb-3 ml-2">이동 &amp; 긴급</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <button onclick="showPhrase('🚾', '화장실이 어디인가요?', '시쇼우지앤 짜이나리?', '洗手间在哪里？')" class="bg-white p-3 rounded-xl shadow-sm border border-orange-200 hover:bg-orange-100 transition text-center"><div class="text-2xl mb-1">🚾</div><div class="text-xs font-bold">화장실</div></button>
+                    <button onclick="showPhrase('📍', '여기로 가주세요', '칭 다오 쩌얼', '请到这儿')" class="bg-white p-3 rounded-xl shadow-sm border border-orange-200 hover:bg-orange-100 transition text-center"><div class="text-2xl mb-1">📍</div><div class="text-xs font-bold">여기로 가주세요</div></button>
+                    <button onclick="showPhrase('📸', '사진 좀 찍어주세요', '칭 빵 워 파이자오', '请帮我拍照')" class="bg-white p-3 rounded-xl shadow-sm border border-orange-200 hover:bg-orange-100 transition text-center"><div class="text-2xl mb-1">📸</div><div class="text-xs font-bold">사진 찍어주세요</div></button>
+                    <button onclick="showPhrase('🆘', '도와주세요! 길을 잃었어요', '칭 빵빵워, 워 미루러', '请帮帮我，我迷路了')" class="bg-white p-3 rounded-xl shadow-sm border border-red-300 bg-red-50 hover:bg-red-100 transition text-center"><div class="text-2xl mb-1">🆘</div><div class="text-xs font-bold text-red-700">길 잃음</div></button>
+                    <button onclick="showPhrase('🏥', '병원/약국이 필요해요', '워 쉬야오 취 이위앤/야오디앤', '我需要去医院/药店')" class="bg-white p-3 rounded-xl shadow-sm border border-red-300 bg-red-50 hover:bg-red-100 transition text-center"><div class="text-2xl mb-1">🏥</div><div class="text-xs font-bold text-red-700">병원/약국</div></button>
+                </div>
+            </div>
+        </div>
+        <div id="phrase-modal" class="fixed inset-0 z-[60] bg-black/80 hidden flex items-center justify-center p-4 transition-opacity">
+            <div class="bg-white w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl relative">
+                <button onclick="closePhrase()" class="absolute top-4 right-4 text-slate-400 text-xl"><i class="fa-solid fa-xmark"></i></button>
+                <div id="modal-emoji" class="text-6xl mb-4 mt-4">💬</div>
+                <div class="bg-orange-50 text-orange-600 text-xs font-bold px-3 py-1 rounded-full inline-block mb-4 border border-orange-200">현지인에게 이 화면을 보여주세요</div>
+                <div id="modal-local" class="text-3xl font-bold text-slate-800 mb-6 font-[Nanum_Myeongjo]"></div>
+                <div class="bg-slate-100 rounded-xl p-3 border border-slate-200">
+                    <div id="modal-korean" class="text-sm font-bold text-slate-700 mb-1"></div>
+                    <div id="modal-pronounce" class="text-xs text-slate-500"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="check" class="py-16 bg-white border-t border-slate-100">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl font-bold text-slate-800">준비물 체크리스트 &amp; 메모</h2>
+            <p class="text-sm text-slate-500 mt-1">입력 내용은 이 기기에 자동 저장됩니다.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div class="bg-cyan-50 p-6 rounded-2xl border border-cyan-100">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-lg text-cyan-900">필수 준비물</h3>
+                    <button onclick="resetChecklist()" class="text-xs text-slate-500 underline bg-white px-2 py-1 rounded border">[초기화]</button>
+                </div>
+                <div id="checklist-container" class="space-y-2"></div>
+            </div>
+            <div class="bg-yellow-50 p-6 rounded-2xl border border-yellow-100">
+                <h3 class="font-bold text-lg mb-4 text-yellow-800">탐방 메모장</h3>
+                <textarea id="travel-memo" class="w-full h-64 bg-white p-4 rounded-lg border border-yellow-200 text-slate-700 resize-none focus:outline-none focus:ring-2 focus:ring-yellow-400" placeholder="질문하고 싶은 점, 인상 깊었던 장면, 인솔자 연락처 등을 적어보세요."></textarea>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="safety" class="py-16 bg-slate-50 border-t border-slate-200">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-10">
+            <span class="text-red-600 font-bold tracking-wider uppercase text-sm">SAFETY</span>
+            <h2 class="text-3xl font-bold text-slate-800 mt-2">비상 연락 및 안전</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10">
+            <div class="bg-white p-6 rounded-2xl border border-red-200"><h3 class="font-bold text-red-800 mb-3">현지 긴급번호</h3><ul class="text-sm space-y-2"><li><strong>경찰:</strong> 110</li><li><strong>소방:</strong> 119</li><li><strong>구급:</strong> 120</li></ul></div>
+            <div class="bg-white p-6 rounded-2xl border border-amber-200"><h3 class="font-bold text-amber-800 mb-3">투어메이커 담당</h3><ul class="text-sm space-y-2"><li><strong>총괄:</strong> 조혁 이사 010-4249-4026</li><li><strong>대표/실무 인솔:</strong> 이재명 010-9443-7881</li><li><strong>현지 통역:</strong> 미팅 시 안내</li></ul></div>
+            <div class="bg-white p-6 rounded-2xl border border-blue-200"><h3 class="font-bold text-blue-800 mb-3">주상하이 총영사관</h3><ul class="text-sm space-y-2"><li><strong>대표:</strong> +86-21-6295-5000</li><li><strong>긴급:</strong> +86-138-1650-9503</li></ul></div>
+        </div>
+        <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl border border-red-100 p-6 md:p-8 text-center">
+            <h3 class="text-xl font-bold text-slate-800 mb-4">투어메이커 안전 매뉴얼 (T-safe24)</h3>
+            <p class="text-sm text-slate-600 mb-4">현장 위치 기반 병원 탐색 및 SOS 전송</p>
+            <a href="https://indadady.github.io/T-safe24/" target="_blank" rel="noopener" class="inline-flex items-center bg-[#c23e3e] text-white px-6 py-2 rounded-lg font-bold text-sm">매뉴얼 확인하기 <i class="fa-solid fa-arrow-right ml-2"></i></a>
+        </div>
+    </div>
+</section>
+
+<section id="ai-guide" class="py-16 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="inline-block bg-purple-500/20 text-purple-300 text-xs px-3 py-1 rounded-full font-bold mb-3 border border-purple-500/30">플라이주(FlyZoo) 전용</span>
+                <h2 class="text-3xl font-bold mb-3"><i class="fa-solid fa-robot text-purple-400"></i> 객실 AI 음성비서 가이드</h2>
+                <p class="text-slate-300 text-sm">먼저 "티엔마오 징링(天猫精灵)"을 부른 뒤 명령을 말하세요.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-5">
+                <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700"><h4 class="font-bold text-amber-400 mb-4">조명 · 커튼</h4><ul class="space-y-2 text-sm"><li class="flex justify-between"><span>불 켜기</span><span class="text-amber-200">다카이 떵</span></li><li class="flex justify-between"><span>불 끄기</span><span class="text-amber-200">꽌비 떵</span></li><li class="flex justify-between"><span>커튼 열기</span><span class="text-amber-200">다카이 촹리앤</span></li><li class="flex justify-between"><span>커튼 닫기</span><span class="text-amber-200">꽌비 촹리앤</span></li></ul></div>
+                <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700"><h4 class="font-bold text-cyan-400 mb-4">에어컨 · TV</h4><ul class="space-y-2 text-sm"><li class="flex justify-between"><span>에어컨 켜기</span><span class="text-cyan-200">다카이 콩탸오</span></li><li class="flex justify-between"><span>에어컨 끄기</span><span class="text-cyan-200">꽌비 콩탸오</span></li><li class="flex justify-between"><span>TV 켜기</span><span class="text-cyan-200">다카이 띠앤스</span></li><li class="flex justify-between"><span>프런트 연결</span><span class="text-cyan-200">후쟈오 치앤타이</span></li></ul></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="feedback" class="py-16 bg-white border-t border-slate-100">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-6">강원대 항저우 AI 체험·실증</h2>
+        <div class="max-w-3xl mx-auto bg-slate-50 p-8 rounded-2xl border border-slate-100">
+            <h3 class="text-xl font-bold text-cyan-700 mb-4">관찰 · 실증 · 대학 적용으로 이어가는 여정</h3>
+            <p class="text-slate-600 leading-relaxed">호텔 AI·박람회·기업·시장조사·도시브레인을 통해 배운 내용을 조별 대학적용과제로 정리해 보세요. 적극적인 질문과 기록이 배움을 키웁니다.</p>
+            <p class="mt-6 font-bold text-lg">투어메이커가 안전하고 알찬 여정을 지원합니다.</p>
+        </div>
+    </div>
+</section>
+
+
+<section id="esg" class="py-12 bg-green-50 border-t border-green-100">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-lg border border-green-200 p-8 text-center">
+            <div id="tm-view-count" class="inline-flex items-center gap-1.5 bg-green-100 text-green-800 text-xs px-3.5 py-1 rounded-full font-bold mb-3 border border-green-200">
+                <span class="w-2 h-2 rounded-full bg-green-600 animate-ping"></span>
+                📊 실시간 가이드북 열람 : <strong class="tm-view-count-val">...</strong>회
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2"><i class="fa-solid fa-leaf text-green-600"></i> ESG 실천 대시보드</h2>
+            <p class="text-sm text-slate-500 mb-6">종이 일정표 대신 스마트 가이드북을 사용하는 디지털 전환 사례</p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200"><p class="text-xs text-amber-800 font-bold">실시간 열람</p><p class="text-xl font-black text-amber-900"><span class="tm-view-count-val">--</span><span class="text-sm font-medium"> 회</span></p></div>
+                <div class="bg-green-50 p-4 rounded-2xl border border-green-100"><p class="text-xs text-slate-500 font-bold">종이 절감</p><p class="text-xl font-black">144<span class="text-sm font-medium"> 장</span></p></div>
+                <div class="bg-green-50 p-4 rounded-2xl border border-green-100"><p class="text-xs text-slate-500 font-bold">탄소 감소</p><p class="text-xl font-black">684<span class="text-sm font-medium"> g</span></p></div>
+                <div class="bg-green-50 p-4 rounded-2xl border border-green-100"><p class="text-xs text-slate-500 font-bold">물 절약</p><p class="text-xl font-black">1,350<span class="text-sm font-medium"> L</span></p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-[#f8f9fa] py-12 border-t border-slate-200 text-center">
+    <div class="container mx-auto px-4 max-w-3xl">
+        <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md mb-8 text-left md:text-center">
+            <div class="flex flex-wrap items-center justify-between md:justify-center gap-2 mb-3">
+                <span class="inline-flex items-center gap-1.5 bg-blue-50 text-[#004098] text-xs font-extrabold px-3 py-1 rounded-full border border-blue-200">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> TOURMAKER SMART GUIDEBOOK
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-600 text-xs font-bold px-3 py-1 rounded-full">
+                    <i class="fa-solid fa-eye text-[#004098]"></i> 📊 실시간 가이드북 열람 : <strong class="tm-view-count-val text-[#004098]">...</strong>회
+                </span>
+            </div>
+            <h3 class="text-lg md:text-xl font-extrabold text-slate-800 mb-1.5">우리 모임·학교·기관도 스마트 가이드북으로 여행 준비하기</h3>
+            <p class="text-xs md:text-sm text-slate-500 leading-relaxed mb-5">맞춤 일정표, 실시간 도로 동선 지도, 체크리스트, 단계별 정산 증빙까지 디지털로 지원합니다.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <button type="button" onclick="openTmInquiryModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#004098] hover:bg-[#002d6b] text-white font-bold px-6 py-3.5 rounded-2xl shadow-md transition active:scale-95 text-sm">
+                    <i class="fa-solid fa-comments"></i> 투어메이커 맞춤 견적 · 상담 문의
+                </button>
+                <a href="https://tourmaker.kr/?utm_source=smart_guidebook&amp;utm_medium=footer_btn&amp;utm_campaign=270426_Kangwon" target="_blank" rel="noopener" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold px-5 py-3.5 rounded-2xl border border-slate-200 transition text-sm">
+                    <img src="assets/images/tourmaker-logo.png" alt="Tourmaker" class="h-5"> 공식 홈페이지 <i class="fa-solid fa-chevron-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+        <p class="text-xs text-slate-500 max-w-xl mx-auto leading-relaxed">[System Powered by TOURMAKER]<br>본 페이지는 <strong>2027 강원대학교 항저우 AI 체험·실증 3박4일</strong> 스마트 가이드북이며 <a href="http://tourmaker.kr" class="underline font-bold text-slate-600" target="_blank" rel="noopener">투어메이커</a>의 트래블 테크 제휴로 제작되었습니다.</p>
+        <p class="text-xs text-slate-400 mt-4">&copy; 2027 Tourmaker. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<div id="tm-inquiry-modal" class="fixed inset-0 z-[120] hidden items-end sm:items-center justify-center bg-black/70 backdrop-blur-sm px-0 sm:px-4 no-print" onclick="closeTmInquiryModal()">
+    <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-100 animate-fade-in-up" onclick="event.stopPropagation()">
+        <div class="bg-gradient-to-r from-[#004098] to-[#002d6b] p-5 text-white flex items-center justify-between">
+            <div>
+                <span class="text-[10px] font-extrabold tracking-widest uppercase text-sky-200 block">TOURMAKER CONSULTING DESK</span>
+                <h3 class="font-bold text-lg mt-0.5">투어메이커 맞춤 연수 · 견적 문의</h3>
+            </div>
+            <button type="button" onclick="closeTmInquiryModal()" class="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white" aria-label="닫기">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="p-5 space-y-3 bg-slate-50">
+            <a href="https://pf.kakao.com/_fxjxiQn/chat" target="_blank" rel="noopener" onclick="trackTmInquiry('kakao')" class="flex items-center justify-between p-4 rounded-2xl bg-[#FEE500] hover:brightness-95 text-slate-900 shadow-sm transition active:scale-[0.99]">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-slate-900/10 flex items-center justify-center text-xl font-black">💬</div>
+                    <div class="text-left">
+                        <div class="flex flex-wrap items-center gap-1.5">
+                            <span class="font-extrabold text-sm">카카오톡 비즈니스 1:1 상담</span>
+                            <span class="text-[10px] font-extrabold bg-rose-600 text-white px-2 py-0.5 rounded-full">가장 추천</span>
+                            <span class="text-[10px] font-extrabold bg-slate-900 text-[#FEE500] px-2 py-0.5 rounded-full">조혁 이사 전담</span>
+                        </div>
+                        <p class="text-xs text-slate-800/80 mt-0.5">가장 빠른 상담 · 조혁 이사가 희망 여행지·인원·일정을 바로 응대합니다</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-700 text-xs"></i>
+            </a>
+
+            <button type="button" onclick="connectTmKakaoId()" class="w-full flex items-center justify-between p-4 rounded-2xl bg-white hover:bg-amber-50 border border-amber-200 text-slate-800 shadow-sm transition active:scale-[0.99]">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg"><i class="fa-solid fa-user-plus"></i></div>
+                    <div class="text-left">
+                        <div class="flex flex-wrap items-center gap-1.5">
+                            <span class="font-extrabold text-sm">이재명 대표 카톡 ID 친구추가</span>
+                            <span class="text-[10px] font-extrabold bg-amber-600 text-white px-2 py-0.5 rounded-full">inseodaeun</span>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-0.5">탭하면 ID가 복사됩니다 · 카카오톡에서 검색 후 친구추가</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-copy text-slate-400 text-xs"></i>
+            </button>
+
+            <a id="tm-sms-inquiry-link" href="sms:010-4249-4026" onclick="trackTmInquiry('sms')" class="flex items-center justify-between p-4 rounded-2xl bg-white hover:bg-sky-50 border border-sky-200 text-slate-800 shadow-sm transition active:scale-[0.99]">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-lg"><i class="fa-solid fa-comment-sms"></i></div>
+                    <div class="text-left">
+                        <span class="font-extrabold text-sm block">10초 문자(SMS) 간편 견적 문의</span>
+                        <p class="text-xs text-slate-500 mt-0.5">조혁 이사(010-4249-4026)에게 문의 양식이 자동 입력됩니다</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-400 text-xs"></i>
+            </a>
+
+            <div class="grid grid-cols-2 gap-2.5">
+                <a href="tel:010-4249-4026" onclick="trackTmInquiry('call_jo')" class="p-3.5 rounded-2xl bg-white hover:bg-slate-100 border border-slate-200 text-left shadow-sm transition">
+                    <p class="text-[10px] font-bold text-emerald-700">현장·카톡·견적 상담</p>
+                    <p class="font-extrabold text-sm text-slate-800 mt-0.5">조혁 이사</p>
+                    <p class="text-xs font-bold text-slate-600 mt-1"><i class="fa-solid fa-phone mr-1 text-emerald-600"></i>010-4249-4026</p>
+                </a>
+                <a href="tel:010-9443-7881" onclick="trackTmInquiry('call_lee')" class="p-3.5 rounded-2xl bg-white hover:bg-slate-100 border border-slate-200 text-left shadow-sm transition">
+                    <p class="text-[10px] font-bold text-[#004098]">총괄·기획 상담</p>
+                    <p class="font-extrabold text-sm text-slate-800 mt-0.5">이재명 대표</p>
+                    <p class="text-xs font-bold text-slate-600 mt-1"><i class="fa-solid fa-phone mr-1 text-[#004098]"></i>010-9443-7881</p>
+                </a>
+            </div>
+
+            <a href="https://tourmaker.kr/?utm_source=smart_guidebook&amp;utm_medium=inquiry_modal&amp;utm_campaign=270426_Kangwon" target="_blank" rel="noopener" onclick="trackTmInquiry('website')" class="flex items-center justify-between p-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white shadow-sm transition">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-sm"><i class="fa-solid fa-globe text-sky-300"></i></div>
+                    <div class="text-left">
+                        <span class="font-bold text-sm block">투어메이커 공식 홈페이지 · 포트폴리오</span>
+                        <p class="text-[11px] text-slate-300 mt-0.5">tourmaker.kr · 대표전화 033-562-2551</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-300"></i>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div id="print-area">
+    <div class="print-page print-page-break">
+        <div class="std-header">
+            <div class="logo"><img src="assets/images/tourmaker-logo.png" alt="투어메이커"></div>
+            <div class="std-doc-info">문서번호: TM-270426-KW · 1/2</div>
+        </div>
+        <div class="std-title">
+            <h1>[강원대학교] 항저우 AI 체험·실증 3박 4일 일정표</h1>
+        </div>
+        <div class="std-overview">
+            <div><span class="label">행사기간</span> 2027. 04. 26 (월) ~ 04. 29 (목)</div>
+            <div><span class="label">이용항공</span> ICN T2 ↔ HGH (항공사·편명 미확정)</div>
+            <div><span class="label">숙박/차량</span> FlyZoo 3박 (위항·시시) / 전용버스</div>
+        </div>
+        <table class="std-table">
+            <thead>
+                <tr>
+                    <th class="col-date">일자</th>
+                    <th class="col-desc">상세 일정</th>
+                    <th class="col-meal">식사</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="day-divider">
+                    <td class="col-date"><strong>제1일</strong><span class="date-sub">4/26 (월)</span><span class="date-city">인천 · 항저우</span></td>
+                    <td class="col-desc">
+                        <div class="time-flow"><span class="time-tag">09:30</span> ICN T2 집결·수속</div>
+                        <div class="time-flow"><span class="time-tag">12:00~12:25경</span> ICN 출발 → <span class="time-tag">13:30~15:00경</span> HGH 도착·입국·수하물</div>
+                        <ul class="desc-list">
+                            <li>15:00~16:30 전용버스 위항·시시 (약 90분)</li>
+                            <li><span class="highlight">▶ FlyZoo 체크인 + 호텔 AI 1차 실증</span><span class="desc-note">10명×3조 순차 · 안면인식·음성 IoT</span></li>
+                            <li>18:30~20:30 환영만찬 + 로봇 배송 순차 실증 (총 6건)</li>
+                        </ul>
+                        <hr class="hotel-divider">
+                        <div class="hotel-info"><strong>HOTEL : FlyZoo (플라이주) · 위항·시시</strong></div>
+                    </td>
+                    <td class="col-meal"><div class="meal-wrapper"><div class="meal-simple"><strong>조:</strong> 개인</div><div class="meal-simple"><strong>중:</strong> 기내식</div><div class="meal-simple"><strong>석:</strong> 현지식</div></div></td>
+                </tr>
+                <tr class="day-divider">
+                    <td class="col-date"><strong>제2일</strong><span class="date-sub">4/27 (화)</span><span class="date-city">항저우 박람회</span></td>
+                    <td class="col-desc">
+                        <ul class="desc-list">
+                            <li>08:00~09:30 조식 후 국제박람센터 이동 (90분 확보)</li>
+                            <li><span class="highlight">▶ AI Hangzhou 2027 집중 관람</span> (09:30~15:00 · 조별 테마·기술미팅)</li>
+                            <li>15:00~16:30 호텔권역 이동 → 16:30~18:00 허마셴성 등 스마트 리테일 관찰</li>
+                            <li>18:00~20:00 단체석식 + 대학 적용 아이디어 1차 토론</li>
+                        </ul>
+                        <hr class="hotel-divider">
+                        <div class="hotel-info"><strong>HOTEL : FlyZoo (플라이주)</strong></div>
+                    </td>
+                    <td class="col-meal"><div class="meal-wrapper"><div class="meal-simple"><strong>조:</strong> 호텔식</div><div class="meal-simple"><strong>중:</strong> 자율식</div><div class="meal-simple"><strong>석:</strong> 현지식</div></div></td>
+                </tr>
+                <tr class="day-divider">
+                    <td class="col-date"><strong>제3일</strong><span class="date-sub">4/28 (수)</span><span class="date-city">기업·시장조사</span></td>
+                    <td class="col-desc">
+                        <ul class="desc-list">
+                            <li><span class="highlight">▶ 알리바바 시시 캠퍼스</span> 09:00~11:30 ※사전승인</li>
+                            <li>12:00~20:00 조별 자율 시장조사 (무인상점·미래과학기술성·알리페이 모빌리티 UX)</li>
+                            <li>20:00~21:30 호텔 조별 결과 정리·발표자료</li>
+                        </ul>
+                        <hr class="hotel-divider">
+                        <div class="hotel-info"><strong>HOTEL : FlyZoo (플라이주)</strong></div>
+                    </td>
+                    <td class="col-meal"><div class="meal-wrapper"><div class="meal-simple"><strong>조:</strong> 호텔식</div><div class="meal-simple"><strong>중:</strong> 자율</div><div class="meal-simple"><strong>석:</strong> 자율</div></div></td>
+                </tr>
+                <tr class="day-divider">
+                    <td class="col-date"><strong>제4일</strong><span class="date-sub">4/29 (목)</span><span class="date-city">항저우 · 인천</span></td>
+                    <td class="col-desc">
+                        <ul class="desc-list">
+                            <li>08:30~10:00 체크아웃 후 <span class="highlight">▶ 도시브레인</span> ※사전협의</li>
+                            <li>10:00~11:40 종합토론·조별 대학적용과제 발표·강평·오찬</li>
+                            <li>11:40~12:30 HGH 이동 (출발 약 2h30m 전 도착)</li>
+                        </ul>
+                        <div class="time-flow"><span class="time-tag">14:30~15:10경</span> HGH 출발 → <span class="time-tag">17:45~18:15경</span> ICN T2 · 강원권 21:00경</div>
+                    </td>
+                    <td class="col-meal"><div class="meal-wrapper"><div class="meal-simple"><strong>조:</strong> 호텔식</div><div class="meal-simple"><strong>중:</strong> 현지식</div><div class="meal-simple"><strong>석:</strong> 기내식</div></div></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="remarks">※ 기업방문 사전승인·항공 연발착·현지사정에 의해 변동될 수 있습니다.</div>
+        <div class="footer-box">
+            <a href="http://tourmaker.kr" class="brand-link">[System Powered by TOURMAKER]</a>
+            <div class="manager-info"><div class="names">담당자 : 이재명 010-9443-7881 · 조혁 010-4249-4026</div></div>
+        </div>
+    </div>
+
+    <div class="print-page">
+        <div class="std-header">
+            <div class="logo"><img src="assets/images/tourmaker-logo.png" alt="투어메이커"></div>
+            <div class="std-doc-info">문서번호: TM-270426-KW · 2/2</div>
+        </div>
+        <div class="std-title"><h1>해외여행 준비물 체크리스트</h1></div>
+        <p class="print-section-title">출국 전 확인</p>
+        <div class="print-check-grid">
+            <div class="print-check-item"><span class="print-check-box"></span><span>여권 (유효기간 6개월 이상)</span></div>
+            <div class="print-check-item"><span class="print-check-box"></span><span>항공권 E-티켓 / 예약 확인서</span></div>
+            <div class="print-check-item"><span class="print-check-box"></span><span>알리페이·위챗페이 설치 및 카드 연동</span></div>
+            <div class="print-check-item"><span class="print-check-box"></span><span>해외 사용 가능 신용카드</span></div>
+            <div class="print-check-item"><span class="print-check-box"></span><span>멀티 어댑터 / 변환 플러그</span></div>
+            <div class="print-check-item"><span class="print-check-box"></span><span>보조배터리 (지퍼백·절연테이프 / 직접 휴대)</span></div>
+            <div class="print-check-item"><span class="print-check-box"></span><span>개인 상비약 · 마스크</span></div>
+            <div class="print-check-item"><span class="print-check-box"></span><span>봄 환절기 겉옷 · 편한 신발 (4월)</span></div>
+            <div class="print-check-item"><span class="print-check-box"></span><span>로밍 또는 VPN 준비</span></div>
+            <div class="print-check-item"><span class="print-check-box"></span><span>여권 사본 · 비상연락처 메모</span></div>
+            <div class="print-check-item"><span class="print-check-box"></span><span>개인 세면도구</span></div>
+            <div class="print-check-item"><span class="print-check-box"></span><span>노트북/태블릿 (기록·발표용)</span></div>
+        </div>
+        <div class="print-seat-box">
+            <h3>✈ 사전좌석배정 · 온라인 체크인 &amp; 보조배터리 기내반입 안내</h3>
+            <ul>
+                <li><strong>항공권 발권(E-티켓 발행) 완료 후</strong> : 이용 항공사·편명 확정 후 해당 항공사 앱·홈페이지에서 <strong>개별 사전좌석배정</strong>을 권장합니다. (대학생·청년 단체)</li>
+                <li><strong>온라인 체크인 권장 (출발 48시간 ~ 1시간 전)</strong> : 국제선 일반 기준이며, 항공사 확정 후 세부 오픈·마감 시각을 안내합니다. 해외 출발(HGH) 온라인 체크인 가능 여부는 항공사·노선에 따릅니다.</li>
+                <li><strong>공항 집결</strong> : 출국 당일 ICN T2 09:30 집결 · 위탁수하물 카운터 접수 필수</li>
+                <li><strong>[필수] 보조배터리·전자담배</strong> : ① 위탁 금지·기내 사용·충전 금지 ② 선반 보관 불가(직접 휴대/앞주머니) ③ 단락 방지(절연테이프·비닐백, 전자담배 OFF) ④ 1인 최대 2개·160Wh 초과 불가 (100~160Wh 카운터 승인)</li>
+            </ul>
+        </div>
+        <div class="print-qr-panel">
+            <img src="assets/images/guidebook-qr.png" alt="스마트 가이드북 QR코드" width="128" height="128">
+            <div>
+                <h3>스마트 가이드북</h3>
+                <p>QR을 스캔하면 상세 일정·동선 지도·준비물 체크·중국어 회화를 휴대폰에서 바로 확인할 수 있습니다.</p>
+                <p class="print-qr-url">https://indadady.github.io/270426_Kangwon/</p>
+            </div>
+        </div>
+        <div class="footer-box">
+            <a href="http://tourmaker.kr" class="brand-link">[System Powered by TOURMAKER]</a>
+            <div class="manager-info"><div class="names">담당자 : 이재명 010-9443-7881 · 조혁 010-4249-4026</div></div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const TEST_DATE = "";
+const EVENT_DAYS = {
+    '2027-04-26': 'day1',
+    '2027-04-27': 'day2',
+    '2027-04-28': 'day3',
+    '2027-04-29': 'day4'
+};
+const EVENT_START = '2027-04-26';
+const EVENT_END = '2027-04-29';
+
+function isInAppBrowser() {
+    const ua = (navigator.userAgent || '').toLowerCase();
+    return /kakaotalk|naver|line\/|fbav|instagram|daumapps|everytimeapp|band\//.test(ua);
+}
+function handlePrint() {
+    if (isInAppBrowser()) {
+        alert('이 앱에서는 인쇄가 어려워요.\n다른 브라우저나 PC에서 열어 주세요.');
+        return;
+    }
+    window.print();
+}
+
+function getGuidebookToday() {
+    const q = new URLSearchParams(location.search).get('test_date');
+    if (q && /^\d{4}-\d{2}-\d{2}$/.test(q)) return q;
+    if (TEST_DATE) return TEST_DATE;
+    return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul' }).format(new Date());
+}
+function ymdDiffDays(a, b) {
+    const [ay, am, ad] = a.split('-').map(Number);
+    const [by, bm, bd] = b.split('-').map(Number);
+    return Math.round((Date.UTC(ay, am - 1, ad) - Date.UTC(by, bm - 1, bd)) / 86400000);
+}
+function getTodayDayKey() { return EVENT_DAYS[getGuidebookToday()] || null; }
+function activateDayTab(dayKey) {
+    const btn = document.querySelector(`.tab-btn[onclick*="'${dayKey}'"]`);
+    if (!btn) return;
+    openTab({ currentTarget: btn }, dayKey);
+}
+function goToTodaySchedule() {
+    const dayKey = getTodayDayKey();
+    if (dayKey) activateDayTab(dayKey);
+    document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
+}
+function goToTodayRoute() {
+    const dayKey = getTodayDayKey();
+    if (dayKey) filterMap(dayKey);
+    document.getElementById('map-section')?.scrollIntoView({ behavior: 'smooth' });
+}
+function initEventDayUI() {
+    const bar = document.getElementById('event-day-bar');
+    if (!bar) return;
+    const dayKey = getTodayDayKey();
+    bar.classList.toggle('hidden', !dayKey);
+    document.body.classList.toggle('event-day', !!dayKey);
+    if (dayKey) activateDayTab(dayKey);
+}
+function openTab(evt, tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-cyan-600', 'text-white', 'border-cyan-600');
+        btn.classList.add('bg-white', 'text-slate-500', 'border-slate-200');
+    });
+    document.getElementById(tabId)?.classList.remove('hidden');
+    const target = evt && evt.currentTarget ? evt.currentTarget : document.querySelector(`.tab-btn[onclick*="'${tabId}'"]`);
+    if (target) {
+        target.classList.add('active', 'bg-cyan-600', 'text-white', 'border-cyan-600');
+        target.classList.remove('bg-white', 'text-slate-500', 'border-slate-200');
+    }
+}
+function shareLink() {
+    const url = window.location.href;
+    if (navigator.share) navigator.share({ title: '강원대 항저우 AI 체험·실증 가이드북', url }).catch(()=>{});
+    else navigator.clipboard?.writeText(url).then(() => alert('링크가 복사되었습니다.'));
+}
+function setDDayLogic() {
+    const today = getGuidebookToday();
+    const untilStart = ymdDiffDays(EVENT_START, today);
+    const sinceStart = ymdDiffDays(today, EVENT_START);
+    const afterEnd = ymdDiffDays(today, EVENT_END);
+    const badge = document.getElementById('d-day-badge');
+    const heroDynamicMsg = document.getElementById('hero-dynamic-msg');
+    const heroDate = document.getElementById('hero-date');
+    if (!badge) return;
+    if (untilStart > 0) {
+        badge.textContent = `D-${untilStart}`;
+        badge.className = 'bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold whitespace-nowrap animate-pulse';
+    } else if (afterEnd <= 0) {
+        const currentDay = sinceStart + 1;
+        badge.textContent = `${currentDay}일차`;
+        badge.className = 'bg-orange-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold whitespace-nowrap animate-pulse';
+        heroDate?.classList.add('hidden');
+        if (heroDynamicMsg) {
+            heroDynamicMsg.innerHTML = `현재 <strong>${currentDay}일차</strong> 여정이 진행 중입니다.`;
+            heroDynamicMsg.classList.remove('hidden');
+        }
+    } else {
+        badge.textContent = '여정 종료';
+        badge.className = 'bg-slate-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold whitespace-nowrap';
+        heroDate?.classList.add('hidden');
+        if (heroDynamicMsg) {
+            heroDynamicMsg.innerHTML = '모든 여정이 종료되었습니다.<br>좋은 추억으로 오래 간직되길 바랍니다.';
+            heroDynamicMsg.classList.remove('text-cyan-300');
+            heroDynamicMsg.classList.add('text-slate-300');
+            heroDynamicMsg.classList.remove('hidden');
+        }
+    }
+    badge.classList.remove('hidden');
+}
+async function fetchWidgets() {
+    try {
+        const weatherRes = await fetch('https://api.open-meteo.com/v1/forecast?latitude=30.2741&longitude=120.1551&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FShanghai&forecast_days=5');
+        const weatherData = await weatherRes.json();
+        const weatherMap = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌧️',53:'🌧️',55:'🌧️',61:'☔',63:'☔',65:'☔',71:'❄️',73:'❄️',75:'❄️',95:'⛈️'};
+        const container = document.getElementById('weather-container');
+        const codes = weatherData.daily.weather_code || weatherData.daily.weathercode || [];
+        container.innerHTML = '';
+        for (let i = 0; i < Math.min(5, (weatherData.daily.time || []).length); i++) {
+            const dateStr = weatherData.daily.time[i].substring(5).replace('-', '/');
+            const icon = weatherMap[codes[i]] || '🌥️';
+            const tMax = Math.round(weatherData.daily.temperature_2m_max[i]);
+            const tMin = Math.round(weatherData.daily.temperature_2m_min[i]);
+            container.innerHTML += `<div class="bg-white border border-slate-100 rounded-xl p-2 text-center shadow-sm"><div class="text-[10px] text-slate-500 font-bold mb-1">${dateStr}</div><div class="text-xl md:text-2xl mb-1">${icon}</div><div class="text-[10px] font-bold"><span class="text-red-500">${tMax}°</span> <span class="text-blue-500">${tMin}°</span></div></div>`;
+        }
+    } catch (e) {
+        document.getElementById('weather-container').innerHTML = '<div class="text-xs text-red-500 w-full text-center">날씨 정보를 불러오지 못했습니다.</div>';
+    }
+    try {
+        const rateData = await (await fetch('https://api.exchangerate-api.com/v4/latest/CNY')).json();
+        const realKrw = Math.round(rateData.rates.KRW * 1.015);
+        document.getElementById('exchange-rate').innerText = realKrw.toLocaleString();
+        document.getElementById('rate-date').innerText = new Date().toLocaleDateString() + ' 기준';
+        const items = [
+            { name: '스타벅스 아메리카노(Tall)', cny: 30, icon: '☕' },
+            { name: '편의점 생수', cny: 3, icon: '💧' },
+            { name: '지하철 기본', cny: 4, icon: '🚇' },
+            { name: '길거리 밀크티', cny: 15, icon: '🧋' },
+            { name: '빅맥 세트', cny: 40, icon: '🍔' }
+        ];
+        document.getElementById('price-list').innerHTML = items.map(item => {
+            const calcKrw = Math.round(item.cny * realKrw).toLocaleString();
+            return `<div class="flex justify-between items-center border-b border-slate-100 pb-2"><span class="flex items-center gap-2 text-slate-700">${item.icon} ${item.name}</span><div class="text-right"><span class="text-xs text-slate-400 font-bold mr-2">${item.cny}¥</span><span class="text-emerald-700 font-bold">약 ${calcKrw}원</span></div></div>`;
+        }).join('');
+        window.currentRealKrw = realKrw;
+        const calcCny = document.getElementById('calc-cny');
+        const calcKrw = document.getElementById('calc-krw');
+        calcCny?.addEventListener('input', (e) => {
+            const val = parseFloat(e.target.value);
+            calcKrw.value = (!isNaN(val) && val >= 0) ? Math.round(val * window.currentRealKrw).toLocaleString() : '';
+        });
+    } catch (e) {
+        document.getElementById('exchange-rate').innerText = '확인 필요';
+    }
+}
+function showPhrase(emoji, kr, pronounce, local) {
+    document.getElementById('modal-emoji').innerText = emoji;
+    document.getElementById('modal-korean').innerText = kr;
+    document.getElementById('modal-pronounce').innerText = pronounce;
+    document.getElementById('modal-local').innerText = local;
+    const modal = document.getElementById('phrase-modal');
+    modal.classList.remove('hidden');
+    setTimeout(() => { modal.style.opacity = '1'; }, 10);
+}
+function closePhrase() {
+    const modal = document.getElementById('phrase-modal');
+    modal.style.opacity = '0';
+    setTimeout(() => modal.classList.add('hidden'), 300);
+}
+const CHECK_KEY = 'kwu_270426_hangzhou_chk_v1';
+const CHECK_ITEMS = [
+    '여권 (유효기간 6개월+)',
+    '항공권 (E-티켓)',
+    '알리페이/위챗페이 설치 및 연동',
+    '해외 사용 가능 신용카드',
+    '보조배터리 (투명 지퍼백·절연테이프 / 기내 직접 휴대)',
+    '멀티 어댑터 또는 변환 플러그',
+    '개인 상비약 (감기약, 마스크 등)',
+    '봄 환절기 겉옷·레이어드 및 편한 신발',
+    '개인용 VPN 또는 로밍 준비'
+];
+function renderChecklist() {
+    const container = document.getElementById('checklist-container');
+    if (!container) return;
+    const saved = JSON.parse(localStorage.getItem(CHECK_KEY) || '{}');
+    container.innerHTML = CHECK_ITEMS.map((label, idx) => {
+        const id = `chk_${idx}`;
+        const checked = saved[id] ? 'checked' : '';
+        return `<label class="flex items-center gap-2 bg-white/80 border border-cyan-100 rounded-lg px-3 py-2 cursor-pointer hover:bg-cyan-50 transition"><input type="checkbox" id="${id}" ${checked} class="h-4 w-4 text-cyan-600 rounded focus:ring-cyan-500"><span class="text-sm text-slate-700">${label}</span></label>`;
+    }).join('');
+    container.querySelectorAll('input[type=checkbox]').forEach(cb => {
+        cb.addEventListener('change', () => {
+            const currentSaved = JSON.parse(localStorage.getItem(CHECK_KEY) || '{}');
+            currentSaved[cb.id] = cb.checked;
+            localStorage.setItem(CHECK_KEY, JSON.stringify(currentSaved));
+        });
+    });
+}
+function resetChecklist() {
+    if (confirm('체크리스트를 초기화하시겠습니까?')) {
+        localStorage.removeItem(CHECK_KEY);
+        renderChecklist();
+    }
+}
+
+let currentMap = null, mapInited = false, mapLayers = [], mapDrawSeq = 0, activeBus = null;
+const osrmCache = {};
+const spots = {
+    icn: { c:[37.4602,126.4407], t:'인천공항', col:'#64748b', i:'✈️' },
+    hgh: { c:[30.2369,120.4344], t:'항저우 샤오산공항', col:'#64748b', i:'🛬' },
+    hotel_hz: { c:[30.2765,120.0260], t:'FlyZoo 호텔', col:'#8b5cf6', i:'🏨' },
+    expo: { c:[30.2345,120.2340], t:'국제박람센터', col:'#4f46e5', i:'📡' },
+    hema: { c:[30.2700,120.0300], t:'스마트 리테일', col:'#e11d48', i:'🛒' },
+    ali: { c:[30.2805,120.0270], t:'알리바바 시시', col:'#f97316', i:'🏢' },
+    future_tech: { c:[30.2880,120.0150], t:'미래과학기술성', col:'#0891b2', i:'💡' },
+    city_brain: { c:[30.2460,120.1780], t:'도시브레인', col:'#10b981', i:'🧠' }
+};
+const mapHints = {
+    all: '전체 여정: 인천 → 항저우(FlyZoo·박람회·시시·도시브레인) → 인천',
+    day1: '1일차: 인천공항 ✈️ 항저우공항 → FlyZoo 호텔',
+    day2: '2일차: FlyZoo → 국제박람센터 → 스마트 리테일 → FlyZoo',
+    day3: '3일차: FlyZoo → 알리바바 시시 → 미래과학기술성 → FlyZoo (자율 동선 대표)',
+    day4: '4일차: FlyZoo → 도시브레인 → 항저우공항 ✈️ 인천공항'
+};
+const routes = {
+    all: {
+        zoom: ['hgh','hotel_hz','expo','hema','ali','future_tech','city_brain'],
+        maxZoom: 10,
+        legs: [
+            { from:'icn', to:'hgh', mode:'air', color:'#0891b2', label:'ICN→HGH 출국', durationMin: 150 },
+            { from:'hgh', to:'hotel_hz', mode:'road', color:'#0891b2', label:'공항→위항·시시 (약 90분)' },
+            { from:'hotel_hz', to:'expo', mode:'road', color:'#4f46e5' },
+            { from:'expo', to:'hema', mode:'road', color:'#e11d48' },
+            { from:'hema', to:'hotel_hz', mode:'road', color:'#8b5cf6' },
+            { from:'hotel_hz', to:'ali', mode:'road', color:'#f97316' },
+            { from:'ali', to:'future_tech', mode:'road', color:'#0891b2' },
+            { from:'future_tech', to:'hotel_hz', mode:'road', color:'#8b5cf6' },
+            { from:'hotel_hz', to:'city_brain', mode:'road', color:'#10b981' },
+            { from:'city_brain', to:'hgh', mode:'road', color:'#64748b' },
+            { from:'hgh', to:'icn', mode:'air', color:'#64748b', label:'HGH→ICN 귀국', durationMin: 160 }
+        ]
+    },
+    day1: {
+        zoom: ['hgh','hotel_hz'], maxZoom: 11,
+        legs: [
+            { from:'icn', to:'hgh', mode:'air', color:'#0891b2', label:'ICN→HGH', durationMin: 150 },
+            { from:'hgh', to:'hotel_hz', mode:'road', color:'#0891b2', label:'공항→FlyZoo' }
+        ]
+    },
+    day2: {
+        zoom: ['hotel_hz','expo','hema'], maxZoom: 11,
+        legs: [
+            { from:'hotel_hz', to:'expo', mode:'road', color:'#4f46e5' },
+            { from:'expo', to:'hema', mode:'road', color:'#e11d48' },
+            { from:'hema', to:'hotel_hz', mode:'road', color:'#8b5cf6' }
+        ]
+    },
+    day3: {
+        zoom: ['hotel_hz','ali','future_tech'], maxZoom: 12,
+        legs: [
+            { from:'hotel_hz', to:'ali', mode:'road', color:'#f97316' },
+            { from:'ali', to:'future_tech', mode:'road', color:'#0891b2' },
+            { from:'future_tech', to:'hotel_hz', mode:'road', color:'#8b5cf6' }
+        ]
+    },
+    day4: {
+        zoom: ['hotel_hz','city_brain','hgh'], maxZoom: 11,
+        legs: [
+            { from:'hotel_hz', to:'city_brain', mode:'road', color:'#10b981' },
+            { from:'city_brain', to:'hgh', mode:'road', color:'#64748b' },
+            { from:'hgh', to:'icn', mode:'air', color:'#64748b', label:'HGH→ICN', durationMin: 160 }
+        ]
+    }
+};
+
+function isMobileView() { return window.matchMedia('(max-width: 768px)').matches; }
+function pathMeters(path) {
+    let total = 0;
+    for (let i = 1; i < path.length; i++) total += L.latLng(path[i - 1]).distanceTo(L.latLng(path[i]));
+    return total;
+}
+function formatApproxKm(meters) {
+    if (!meters || meters <= 0) return '';
+    if (meters < 800) return '약 ' + Math.round(meters / 100) * 100 + 'm';
+    const km = meters / 1000;
+    if (km < 10) return '약 ' + (Math.round(km * 2) / 2) + 'km';
+    if (km < 50) return '약 ' + Math.round(km) + 'km';
+    if (km < 400) return '약 ' + Math.round(km / 5) * 5 + 'km';
+    return '약 ' + Math.round(km / 50) * 50 + 'km';
+}
+function estimateSeconds(meters, mode, durationMin) {
+    if (durationMin) return durationMin * 60;
+    if (!meters || meters <= 0) return 0;
+    if (mode === 'air') return meters / (750 / 3.6);
+    return meters / (32 / 3.6);
+}
+function groupTravelSeconds(seconds, mode) {
+    if (!seconds || seconds <= 0) return 0;
+    if (mode === 'air') return seconds;
+    return Math.max(10 * 60, seconds * 1.25 + 8 * 60);
+}
+function formatApproxTime(seconds) {
+    if (!seconds || seconds <= 0) return '';
+    const min = Math.max(1, Math.ceil(seconds / 60));
+    if (min < 55) return '약 ' + Math.max(10, Math.ceil(min / 5) * 5) + '분';
+    const rounded = Math.ceil(min / 10) * 10;
+    const h = Math.floor(rounded / 60);
+    const m = rounded % 60;
+    if (!h) return '약 ' + m + '분';
+    if (!m) return '약 ' + h + '시간';
+    return '약 ' + h + '시간 ' + m + '분';
+}
+function setMapDistance(fromKey, toKey, meters, seconds, mode) {
+    const box = document.getElementById('map-distance');
+    const legEl = document.getElementById('map-distance-leg');
+    const timeEl = document.getElementById('map-distance-time');
+    const kmEl = document.getElementById('map-distance-km');
+    if (!box || !legEl || !timeEl || !kmEl) return;
+    if (!fromKey || !toKey) {
+        box.classList.add('hidden');
+        return;
+    }
+    const kmLabel = formatApproxKm(meters);
+    const timeLabel = formatApproxTime(groupTravelSeconds(seconds, mode));
+    box.classList.remove('hidden');
+    legEl.textContent = spots[fromKey].t + ' → ' + spots[toKey].t;
+    timeEl.textContent = timeLabel;
+    kmEl.textContent = kmLabel;
+}
+function pinIcon(spot) {
+    return L.divIcon({
+        className: 'custom-icon',
+        html: `<div class="map-pin-wrap"><div class="map-pin-dot" style="background:${spot.col};">${spot.i}</div><span class="map-pin-label">${spot.t}</span></div>`,
+        iconSize: [96, 52], iconAnchor: [48, 16]
+    });
+}
+function headingDeg(a, b) {
+    const lat1 = a[0] * Math.PI / 180, lat2 = b[0] * Math.PI / 180;
+    const dLng = (b[1] - a[1]) * Math.PI / 180;
+    const y = Math.sin(dLng) * Math.cos(lat2);
+    const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
+    return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+}
+function headingPair(latlngs, i) {
+    const a = latlngs[Math.max(0, Math.min(i, latlngs.length - 1))];
+    let j = Math.min(Math.max(i + 1, 1), latlngs.length - 1);
+    while (j < latlngs.length - 1 && L.latLng(a).distanceTo(L.latLng(latlngs[j])) < 40) j++;
+    return [a, latlngs[j]];
+}
+// ✈️ 기본 기수 ≈ 북동(45°), 🚌 기본 기수 ≈ 동(90°) — 서향(|rot|>90)일 때 버스는 scaleX(-1) 보정
+const PLANE_REST_DEG = 45, BUS_REST_DEG = 90;
+function vehicleCssTransform(mode, from, to) {
+    if (!from || !to) return 'rotate(0deg)';
+    if (L.latLng(from).distanceTo(L.latLng(to)) < 8) return null;
+    const heading = headingDeg(from, to);
+    const rest = mode === 'air' ? PLANE_REST_DEG : BUS_REST_DEG;
+    let rot = heading - rest;
+    while (rot > 180) rot -= 360;
+    while (rot < -180) rot += 360;
+    if (mode !== 'air' && Math.abs(rot) > 90) {
+        const flipRot = rot > 0 ? rot - 180 : rot + 180;
+        return `scaleX(-1) rotate(${flipRot}deg)`;
+    }
+    return `rotate(${rot}deg)`;
+}
+function moverIcon(mode, from, to) {
+    const emoji = mode === 'air' ? '✈️' : '🚌';
+    const transform = vehicleCssTransform(mode, from, to) || 'rotate(0deg)';
+    return L.divIcon({ className: 'custom-icon', html: `<div class="map-bus" data-mode="${mode}" style="transform:${transform}">${emoji}</div>`, iconSize: [28, 28], iconAnchor: [14, 14] });
+}
+function applyMoverHeading(marker, from, to, mode) {
+    if (!marker || !from || !to) return;
+    const transform = vehicleCssTransform(mode, from, to);
+    if (!transform) return;
+    const bus = marker.getElement()?.querySelector('.map-bus');
+    if (bus) bus.style.transform = transform;
+}
+function clearMapLayers() {
+    if (activeBus) activeBus._aborted = true;
+    activeBus = null;
+    mapLayers.forEach(layer => {
+        if (layer._aborted !== undefined) layer._aborted = true;
+        if (currentMap) currentMap.removeLayer(layer);
+    });
+    mapLayers = [];
+}
+function airPath(from, to) {
+    const lat1 = from[0] * Math.PI / 180, lon1 = from[1] * Math.PI / 180;
+    const lat2 = to[0] * Math.PI / 180, lon2 = to[1] * Math.PI / 180;
+    const d = 2 * Math.asin(Math.min(1, Math.sqrt(Math.sin((lat2 - lat1) / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin((lon2 - lon1) / 2) ** 2)));
+    if (!d) return [from, to];
+    const pts = [];
+    for (let i = 0; i <= 20; i++) {
+        const f = i / 20;
+        const A = Math.sin((1 - f) * d) / Math.sin(d);
+        const B = Math.sin(f * d) / Math.sin(d);
+        const x = A * Math.cos(lat1) * Math.cos(lon1) + B * Math.cos(lat2) * Math.cos(lon2);
+        const y = A * Math.cos(lat1) * Math.sin(lon1) + B * Math.cos(lat2) * Math.sin(lon2);
+        const z = A * Math.sin(lat1) + B * Math.sin(lat2);
+        pts.push([Math.atan2(z, Math.sqrt(x * x + y * y)) * 180 / Math.PI, Math.atan2(y, x) * 180 / Math.PI]);
+    }
+    return pts;
+}
+async function roadPath(pts) {
+    const key = pts.map(p => p.join(',')).join('|');
+    if (osrmCache[key]) return osrmCache[key];
+    try {
+        const coords = pts.map(p => `${p[1]},${p[0]}`).join(';');
+        const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`);
+        const data = await res.json();
+        if (data.code === 'Ok' && data.routes?.[0]) {
+            const path = data.routes[0].geometry.coordinates.map(([lng, lat]) => [lat, lng]);
+            const packed = { path, meters: data.routes[0].distance, seconds: data.routes[0].duration };
+            osrmCache[key] = packed;
+            return packed;
+        }
+    } catch (e) {}
+    const meters = pathMeters(pts);
+    return { path: pts, meters, seconds: estimateSeconds(meters, 'road') };
+}
+async function resolveLegPath(leg) {
+    if (leg.mode === 'air') {
+        const path = airPath(spots[leg.from].c, spots[leg.to].c);
+        const meters = pathMeters(path);
+        return { path, meters, seconds: estimateSeconds(meters, 'air', leg.durationMin) };
+    }
+    return roadPath([spots[leg.from].c, spots[leg.to].c]);
+}
+function lineDuration(pixelLength, routeKey, mode) {
+    const mobile = isMobileView();
+    const allView = routeKey === 'all';
+    const min = mobile ? (allView ? 1600 : 2800) : (allView ? 900 : 1400);
+    const max = mobile ? (allView ? 2800 : 5600) : (allView ? 1800 : 2800);
+    const pxPerMs = mobile ? (allView ? 0.22 : 0.12) : 0.28;
+    let ms = Math.max(min, Math.min(max, pixelLength / pxPerMs));
+    if (mode === 'air') ms = Math.min(ms, mobile ? 2800 : 1600);
+    return ms;
+}
+function whenPathReady(polyline) {
+    return new Promise(resolve => {
+        let tries = 24;
+        const tick = () => {
+            const el = polyline.getElement();
+            if (el && typeof el.getTotalLength === 'function') resolve(el);
+            else if (tries-- > 0) requestAnimationFrame(tick);
+            else resolve(null);
+        };
+        requestAnimationFrame(tick);
+    });
+}
+function animateLine(polyline, duration, dashPattern) {
+    return new Promise(async resolve => {
+        const path = await whenPathReady(polyline);
+        if (!path) { resolve(duration); return; }
+        const length = path.getTotalLength();
+        const ms = duration || 1400;
+        path.style.transition = 'none';
+        path.style.strokeDasharray = length + ' ' + length;
+        path.style.strokeDashoffset = String(length);
+        path.getBoundingClientRect();
+        path.style.transition = `stroke-dashoffset ${ms}ms ease-in-out`;
+        path.style.strokeDashoffset = '0';
+        setTimeout(() => {
+            if (dashPattern) {
+                path.style.transition = 'none';
+                path.style.strokeDasharray = dashPattern;
+                path.style.strokeDashoffset = '0';
+            }
+            resolve(ms);
+        }, ms + 40);
+    });
+}
+function moveMarkerAlong(marker, latlngs, duration, mode) {
+    return new Promise(resolve => {
+        if (!marker || !latlngs || latlngs.length < 2) { resolve(); return; }
+        const dists = [0];
+        let total = 0;
+        for (let i = 1; i < latlngs.length; i++) {
+            total += L.latLng(latlngs[i - 1]).distanceTo(L.latLng(latlngs[i]));
+            dists.push(total);
+        }
+        if (total === 0) { resolve(); return; }
+        const [h0a, h0b] = headingPair(latlngs, 0);
+        applyMoverHeading(marker, h0a, h0b, mode);
+        const start = performance.now();
+        const ease = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        function frame(now) {
+            if (marker._aborted) { resolve(); return; }
+            const t = Math.min(1, (now - start) / duration);
+            const target = total * ease(t);
+            let i = 1;
+            while (i < dists.length && dists[i] < target) i++;
+            const a = latlngs[i - 1];
+            const b = latlngs[Math.min(i, latlngs.length - 1)];
+            const span = (dists[i] - dists[i - 1]) || 1;
+            const f = (target - dists[i - 1]) / span;
+            marker.setLatLng([a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]);
+            const [ha, hb] = headingPair(latlngs, i - 1);
+            applyMoverHeading(marker, ha, hb, mode);
+            if (t < 1) requestAnimationFrame(frame);
+            else resolve();
+        }
+        requestAnimationFrame(frame);
+    });
+}
+function fitPath(path, maxZoom) {
+    return new Promise(resolve => {
+        if (!currentMap || !path || path.length < 2) { resolve(); return; }
+        const b = L.latLngBounds(path);
+        let done = false;
+        const finish = () => { if (done) return; done = true; currentMap.off('moveend', finish); resolve(); };
+        currentMap.once('moveend', finish);
+        currentMap.fitBounds(b.pad(0.18), { animate: true, duration: 0.7, maxZoom: maxZoom || 12, padding: [44, 44] });
+        setTimeout(finish, 850);
+    });
+}
+async function drawMap(routeKey) {
+    if (!currentMap) return;
+    const routeData = routes[routeKey] || routes.all;
+    if (!routeData || !routeData.legs || !routeData.legs.length) return;
+    const seq = ++mapDrawSeq;
+    clearMapLayers();
+    const hintEl = document.getElementById('map-hint');
+    if (hintEl) hintEl.textContent = mapHints[routeKey] || '';
+    setMapDistance('', '', 0, 0);
+    const zoomKeys = (routeData.zoom || []).filter(key => spots[key]);
+    if (!zoomKeys.length) return;
+    let bounds = L.latLngBounds(zoomKeys.map(key => spots[key].c));
+    currentMap.fitBounds(bounds, { padding: [48, 48], maxZoom: routeData.maxZoom || 11 });
+    setTimeout(() => currentMap.invalidateSize(), 120);
+    const legs = routeData.legs;
+    const packed = await Promise.all(legs.map(leg => resolveLegPath(leg)));
+    if (seq !== mapDrawSeq) return;
+    const paths = packed.map(item => item.path);
+    await new Promise(r => setTimeout(r, 240));
+    if (seq !== mapDrawSeq) return;
+    paths.forEach((path, idx) => {
+        const ghost = L.polyline(path, {
+            color: '#94a3b8', weight: 3.5, opacity: 0.22,
+            dashArray: legs[idx].mode === 'air' ? '10, 10' : null,
+            lineJoin: 'round', lineCap: 'round'
+        }).addTo(currentMap);
+        mapLayers.push(ghost);
+    });
+    const placed = new Set();
+    const addPin = (key) => {
+        if (!key || placed.has(key)) return;
+        placed.add(key);
+        const spot = spots[key];
+        const marker = L.marker(spot.c, { icon: pinIcon(spot), zIndexOffset: 200 })
+            .addTo(currentMap)
+            .bindTooltip(spot.t, { direction: 'top', offset: [0, -16], className: 'custom-map-tooltip' });
+        mapLayers.push(marker);
+    };
+    const legMaxZoom = (leg) => {
+        if (leg.mode === 'air') return 5;
+        if (routeKey === 'all') return 11;
+        return Math.max(routeData.maxZoom || 12, 11);
+    };
+    await fitPath(paths[0], legMaxZoom(legs[0]));
+    if (seq !== mapDrawSeq) return;
+    addPin(legs[0].from);
+    let mover = L.marker(spots[legs[0].from].c, {
+        icon: moverIcon(legs[0].mode, spots[legs[0].from].c, spots[legs[0].to].c),
+        zIndexOffset: 900
+    }).addTo(currentMap);
+    mover._aborted = false;
+    activeBus = mover;
+    mapLayers.push(mover);
+    for (let i = 0; i < legs.length; i++) {
+        if (seq !== mapDrawSeq) return;
+        const leg = legs[i];
+        const path = paths[i];
+        const meters = packed[i].meters || pathMeters(path);
+        const seconds = packed[i].seconds || estimateSeconds(meters, leg.mode, leg.durationMin);
+        const dashed = leg.mode === 'air';
+        const dashPattern = dashed ? '14, 10' : null;
+        addPin(leg.from);
+        if (mover) {
+            mover.setIcon(moverIcon(leg.mode, spots[leg.from].c, spots[leg.to].c));
+            mover.setLatLng(path[0]);
+        }
+        setMapDistance(leg.from, leg.to, meters, seconds, leg.mode);
+        await fitPath(path, legMaxZoom(leg));
+        if (seq !== mapDrawSeq) return;
+        const poly = L.polyline(path, {
+            color: leg.color, weight: dashed ? 3.5 : 5, opacity: 0.95,
+            dashArray: dashPattern, lineJoin: 'round', lineCap: 'round'
+        }).addTo(currentMap);
+        if (leg.label) poly.bindTooltip('<b>' + leg.label + '</b>', { sticky: true, direction: 'center' });
+        mapLayers.push(poly);
+        const ready = await whenPathReady(poly);
+        const ms = lineDuration(ready ? ready.getTotalLength() : 400, routeKey, leg.mode);
+        await Promise.all([animateLine(poly, ms, dashPattern), moveMarkerAlong(mover, path, ms, leg.mode)]);
+        if (seq !== mapDrawSeq) return;
+        addPin(leg.to);
+        await new Promise(r => setTimeout(r, isMobileView() ? 280 : 140));
+    }
+    if (seq !== mapDrawSeq) return;
+    if (mover && currentMap.hasLayer(mover)) currentMap.removeLayer(mover);
+    mapLayers = mapLayers.filter(layer => layer !== mover);
+    if (activeBus === mover) activeBus = null;
+    // 재생 종료 요약 뷰는 현지 스팟 기준 (국제 공항 ICN 제외하여 과도하게 축소되지 않게)
+    const finalKeys = zoomKeys.filter(k => k !== 'icn');
+    const overviewKeys = finalKeys.length ? finalKeys : zoomKeys;
+    currentMap.fitBounds(L.latLngBounds(overviewKeys.map(k => spots[k].c)), {
+        padding: [48, 48],
+        maxZoom: routeKey === 'all' ? 8 : Math.min(routeData.maxZoom || 11, 12),
+        animate: true
+    });
+    setTimeout(() => currentMap.invalidateSize(), 160);
+}
+function mapZoom(delta) {
+    if (!currentMap) return;
+    if (delta > 0) currentMap.zoomIn();
+    else currentMap.zoomOut();
+}
+window.mapZoom = mapZoom;
+function setMapBtn(day) {
+    document.querySelectorAll('.map-btn').forEach(btn => {
+        btn.classList.remove('bg-purple-600', 'text-white', 'border-purple-600');
+        btn.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+    });
+    const targetBtn = document.getElementById('btn-map-' + day);
+    if (targetBtn) {
+        targetBtn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+        targetBtn.classList.add('bg-purple-600', 'text-white', 'border-purple-600');
+    }
+}
+function initMap(initialKey) {
+    if (!ensureMapReady()) return;
+    let startKey = initialKey || getTodayDayKey() || (isMobileView() ? 'day1' : 'all');
+    filterMap(startKey);
+}
+function ensureMapReady() {
+    if (currentMap) {
+        setTimeout(() => currentMap.invalidateSize(), 80);
+        return true;
+    }
+    if (!window.L) return false;
+    const el = document.getElementById('map');
+    if (!el) return false;
+    mapInited = true;
+    currentMap = L.map(el, { scrollWheelZoom: false, zoomControl: false }).setView([30.27, 120.15], 10);
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 19, attribution: 'Tiles &copy; Esri'
+    }).addTo(currentMap);
+    setTimeout(() => currentMap.invalidateSize(), 120);
+    return true;
+}
+window.filterMap = function(day) {
+    if (!ensureMapReady()) return;
+    setMapBtn(day);
+    drawMap(day);
+};
+document.addEventListener('DOMContentLoaded', () => {
+    setDDayLogic();
+    initEventDayUI();
+    fetchWidgets();
+    renderChecklist();
+    const memo = document.getElementById('travel-memo');
+    if (memo) {
+        const KEY = 'kwu_270426_hangzhou_memo_v1';
+        memo.value = localStorage.getItem(KEY) || '';
+        memo.addEventListener('input', () => localStorage.setItem(KEY, memo.value));
+    }
+    const bootMap = () => {
+        if (!window.L) { setTimeout(bootMap, 200); return; }
+        initMap();
+    };
+    setTimeout(bootMap, 200);
+    const io = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && currentMap) {
+            currentMap.invalidateSize();
+            io.disconnect();
+        }
+    }, { threshold: 0.05 });
+    const mapSection = document.getElementById('map-section');
+    if (mapSection) io.observe(mapSection);
+    window.addEventListener('resize', () => { if (currentMap) currentMap.invalidateSize(); });
+});
+
+const TM_GUIDEBOOK_SLUG = '270426_Kangwon';
+const TM_GUIDEBOOK_NAME = '2027 강원대 항저우 AI 체험·실증';
+const TM_KAKAO_ID = 'inseodaeun';
+async function connectTmKakaoId() {
+    trackTmInquiry('kakao_id');
+    try {
+        await navigator.clipboard.writeText(TM_KAKAO_ID);
+        if (typeof showToast === 'function') showToast('카톡 ID inseodaeun 복사됨 · 카카오톡에서 검색해 친구추가');
+        else alert('카톡 ID inseodaeun 복사됨 · 카카오톡에서 검색해 친구추가');
+    } catch (e) {
+        window.prompt('카톡 ID를 복사하세요', TM_KAKAO_ID);
+    }
+}
+function openTmInquiryModal() {
+    const m = document.getElementById('tm-inquiry-modal');
+    if (!m) return;
+    const smsLink = document.getElementById('tm-sms-inquiry-link');
+    if (smsLink) {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const body = encodeURIComponent(`[${TM_GUIDEBOOK_NAME} 가이드북 보고 문의드립니다]\n• 단체/기관명: \n• 희망 여행지: \n• 예상 인원 / 시기: `);
+        smsLink.href = `sms:010-4249-4026${isIOS ? '&' : '?'}body=${body}`;
+    }
+    m.classList.remove('hidden');
+    m.classList.add('flex');
+    trackTmInquiry('modal_open');
+}
+function closeTmInquiryModal() {
+    const m = document.getElementById('tm-inquiry-modal');
+    if (!m) return;
+    m.classList.add('hidden');
+    m.classList.remove('flex');
+}
+function trackTmInquiry(action) {
+    try {
+        if (typeof gtag === 'function') {
+            gtag('event', 'tm_guidebook_inquiry', {
+                event_category: 'lead',
+                event_label: `${TM_GUIDEBOOK_SLUG}_${action}`
+            });
+        }
+    } catch (e) {}
+}
+async function initTmViewCounter() {
+    const els = document.querySelectorAll('.tm-view-count-val');
+    if (!els.length) return;
+    const hitKey = 'tm_hit_' + TM_GUIDEBOOK_SLUG;
+    const cacheKey = 'tm_cnt_' + TM_GUIDEBOOK_SLUG;
+    const alreadyHit = sessionStorage.getItem(hitKey);
+    let count = null;
+    try {
+        const mode = alreadyHit ? 'get' : 'hit';
+        const res = await fetch(`https://abacus.jasoncameron.dev/${mode}/tourmaker.kr/${TM_GUIDEBOOK_SLUG}`);
+        if (res.ok) {
+            const data = await res.json();
+            if (typeof data.value === 'number') {
+                count = data.value;
+                sessionStorage.setItem(hitKey, '1');
+            }
+        }
+    } catch (e) {}
+    if (count === null || count === 0) {
+        try {
+            const res2 = await fetch(`https://tally.yuki.sh/hits/tourmaker/${TM_GUIDEBOOK_SLUG}.json${alreadyHit ? '?mode=read' : ''}`);
+            if (res2.ok) {
+                const data2 = await res2.json();
+                if (typeof data2.visit === 'number') {
+                    count = data2.visit;
+                    sessionStorage.setItem(hitKey, '1');
+                }
+            }
+        } catch (e) {}
+    }
+    if (count !== null && count > 0) {
+        localStorage.setItem(cacheKey, String(count));
+    } else {
+        count = parseInt(localStorage.getItem(cacheKey) || '1', 10) || 1;
+    }
+    els.forEach(el => { el.textContent = count.toLocaleString(); });
+}
+initTmViewCounter();
+</script>
+</body>
+</html>
