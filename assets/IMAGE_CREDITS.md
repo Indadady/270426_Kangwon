@@ -5,7 +5,7 @@ OG/공유 썸네일 `og-thumb-2027.jpg` — 항저우 AI·스마트시티(도시
 | File | Subject | Source / note |
 |------|---------|---------------|
 | `og-thumb-2027.jpg` | City Brain / smart-city AI exhibit | TourMaker asset (AI 매칭 썸네일) |
-| `hero-hangzhou.jpg` | West Lake, Hangzhou | Wikimedia Commons — *West Lake - Hangzhou, China.jpg* |
+| `hero-hangzhou.jpg` | Hangzhou International Expo Center main entrance (AI Hangzhou venue) | Wikimedia Commons — *[杭州国际博览中心主入口.jpg](https://commons.wikimedia.org/wiki/File:%E6%9D%AD%E5%B7%9E%E5%9B%BD%E9%99%85%E5%8D%9A%E8%A7%88%E4%B8%AD%E5%BF%83%E4%B8%BB%E5%85%A5%E5%8F%A3.jpg)* (三猎, CC BY-SA 4.0). Different frame from `venue-expo.jpg`. |
 | `hero-skyline.jpg` | West Lake + Hangzhou skyline | Wikimedia Commons — *Hangzhou Skyline on West Lake.jpg* |
 | `venue-expo.jpg` | Hangzhou International Expo Center | Wikimedia Commons — *Hangzhou International Expo Center, Feb 2017 - 01.jpg* (CC BY-SA 4.0) |
 | `venue-alibaba-xixi.jpg` | Alibaba Xixi / Taobao City | Wikimedia Commons — *TaobaoCity Alibaba Xixi Park.jpg* (CC BY-SA 4.0) |
