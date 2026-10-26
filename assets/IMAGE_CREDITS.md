@@ -18,5 +18,6 @@ OG/공유 썸네일 `og-thumb-2027.jpg` — 항저우 AI·스마트시티(도시
 | `venue-flyzoo.jpg` / `venue-flyzoo-room.jpg` | FlyZoo AI Hotel | TourMaker asset |
 | `venue-alibaba-atrium.jpg` | Alibaba campus atrium | TourMaker asset |
 | `venue-citybrain.jpg` | City Brain / smart-city exhibit | TourMaker asset |
+| `venue-unitree.jpg` | Unitree Hangzhou headquarters | Wikimedia Commons — *20260425 Unitree Headquarter 01.jpg* (Windmemories, CC BY-SA 4.0) |
 
 Wikimedia files remain under their respective CC licenses; attribution retained for educational guidebook use.
