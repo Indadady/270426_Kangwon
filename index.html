@@ -156,7 +156,7 @@
         <h3 id="guidebook-lock-title" class="text-xl font-bold text-slate-800 mb-1">보안 접속 인증</h3>
         <p class="text-xs text-slate-500 mb-6 leading-relaxed">
             본 가이드북은 저작권 및 일정 보호를 위해<br>
-            출발 2주 전까지 비밀번호 인증이 필요합니다.<br>
+            출발 2주 전·여정 종료 후에는 비밀번호 인증이 필요합니다.<br>
             <span class="text-xs font-bold text-[#004098] mt-1 block">💡 힌트: 출발일 MM월DD일 → MMDD (예: 01월01일 → 0101)</span>
         </p>
         <div class="space-y-3">
@@ -820,8 +820,11 @@
             본 스마트 가이드북은 <strong>(주)투어메이커의 고유 지적재산</strong>입니다.
             <strong class="tm-client-name">강원대학교</strong> 전용 제안서·스마트 가이드북이며, 외부 유출 시 <strong>접속 IP 및 열람 횟수(현재 <span class="tm-view-count-val font-extrabold text-red-600">...</span>회)가 자동 기록</strong>됩니다.
         </div>
-        <p class="text-xs text-slate-500 w-full leading-relaxed">[System Powered by TOURMAKER]<br>본 페이지는 <strong>2027 강원대학교 항저우 AI 전시회 및 방문지 견학 3박 4일</strong> 스마트 가이드북이며 <a href="http://tourmaker.kr" class="underline font-bold text-slate-600" target="_blank" rel="noopener">투어메이커</a>의 트래블 테크 제휴로 제작되었습니다.</p>
-        <p class="text-xs text-slate-400 mt-4">&copy; 2027 Tourmaker. All Rights Reserved.</p>
+        <div class="w-full pt-4 border-t border-slate-300/50">
+            <p class="text-[11px] font-black text-[#004098] mb-2 tracking-wider">[System Powered by TOURMAKER]</p>
+            <p class="text-xs text-slate-500 font-medium leading-relaxed">본 페이지는 <strong>2027 강원대학교 항저우 AI 전시회 및 방문지 견학 3박 4일</strong> 스마트 가이드북이며 <a href="http://tourmaker.kr" class="underline font-bold text-slate-600" target="_blank" rel="noopener">투어메이커</a>의 트래블 테크 제휴로 제작되었습니다.</p>
+            <p class="text-[11px] text-slate-700 font-medium mt-3 leading-relaxed">© 2026 이재명 · 투어메이커 스마트 가이드북 플랫폼<br><span class="font-bold text-[#004098]">한국저작권위원회 저작권 등록번호 C-2026-059022</span> (등록일 2026.11.12)</p>
+        </div>
     </div>
 </footer>
 
@@ -1856,9 +1859,14 @@ initTmViewCounter();
 
 (function initSmartSecurityLock() {
     const EVENT_START_DATE = (typeof EVENT_START === 'string' && EVENT_START) || '2027-04-26';
+    const EVENT_END_DATE = (typeof EVENT_END === 'string' && EVENT_END) || '2027-04-29';
     const VALID_PASSWORDS = [EVENT_START_DATE.slice(5, 7) + EVENT_START_DATE.slice(8, 10)]; // 0426
     const UNLOCK_DAYS_BEFORE = 14;
-    const STORAGE_KEY = 'tm_unlocked_' + EVENT_START_DATE;
+
+    function unlockStorageKey(today) {
+        if (today > EVENT_END_DATE) return 'tm_unlocked_after_' + EVENT_END_DATE;
+        return 'tm_unlocked_' + EVENT_START_DATE;
+    }
 
     function setLockVisible(on) {
         const modal = document.getElementById('guidebook-lock-modal');
@@ -1870,11 +1878,16 @@ initTmViewCounter();
     }
 
     function shouldRequirePassword() {
-        return ymdDiffDays(EVENT_START_DATE, getGuidebookToday()) > UNLOCK_DAYS_BEFORE;
+        const today = getGuidebookToday();
+        // D-15 이전 잠금 / D-14~EVENT_END 자동 해제 / 여정 종료 다음날부터 재잠금
+        if (ymdDiffDays(EVENT_START_DATE, today) > UNLOCK_DAYS_BEFORE) return true;
+        if (today > EVENT_END_DATE) return true;
+        return false;
     }
 
     function checkLockCondition() {
-        const unlocked = localStorage.getItem(STORAGE_KEY) === 'true';
+        const today = getGuidebookToday();
+        const unlocked = localStorage.getItem(unlockStorageKey(today)) === 'true';
         if (shouldRequirePassword() && !unlocked) {
             setLockVisible(true);
             const input = document.getElementById('lock-password-input');
@@ -1889,7 +1902,7 @@ initTmViewCounter();
         const errorMsg = document.getElementById('lock-error-msg');
         const inputVal = (inputEl?.value || '').trim();
         if (VALID_PASSWORDS.includes(inputVal)) {
-            localStorage.setItem(STORAGE_KEY, 'true');
+            localStorage.setItem(unlockStorageKey(getGuidebookToday()), 'true');
             if (errorMsg) errorMsg.classList.add('hidden');
             setLockVisible(false);
             if (typeof showToast === 'function') showToast('🔓 인증되었습니다. 가이드북을 열람합니다.');
